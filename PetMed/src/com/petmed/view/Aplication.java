@@ -7,6 +7,7 @@
 package com.petmed.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,34 +19,34 @@ import javax.swing.JTextField;
  *
  * @author rbalda
  */
-public class Consultas extends JFrame{
-    private static Consultas Consultas;
+public class Aplication extends JFrame{
+    private static Aplication aplication;
     JLabel text;
     JTextField campo;
     JButton b;
-    Panel_interno p;
+    Panel_superior panel_superior;
     
-    public Consultas(){
-        super("Aplicacion");
+    public Aplication(){
+        super("Pet Med");
         text = new JLabel("Texto de Prueba");
-        campo = new JTextField("escriba aqui");
-        b = new JButton("Hazme Clic");
-        p = new Panel_interno();
+        panel_superior= new Panel_superior();
         Container c;
         c= getContentPane();
         c.setLayout(new BorderLayout());
-        c.add(campo,BorderLayout.NORTH);
-        c.add(text,BorderLayout.SOUTH);
-        c.add(b,BorderLayout.EAST);
-        c.add(p,BorderLayout.CENTER);
-        
+        c.add(panel_superior,BorderLayout.NORTH);
+        c.add(new Panel_opciones(), BorderLayout.WEST);
+        c.add(new Panel_inferior(),BorderLayout.CENTER);
+
+        this.setBackground(Color.red);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
+        this.setSize(750,550);
+        this.setLocationRelativeTo(null);
     }
     
     public static void main(String args[]){
-        Consultas =new Consultas();
+//        Frame_autentificacion ventana = new Frame_autentificacion();
+        aplication = new Aplication();
     }
     
 }
