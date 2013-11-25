@@ -33,17 +33,18 @@ public class Aplication extends JFrame{
         Container c;
         c= getContentPane();
         c.setLayout(new BorderLayout());
-
+<<<<<<< HEAD:PetMed/src/com/petmed/view/Aplication.java
         c.add(panel_superior,BorderLayout.NORTH);
         c.add(new Panel_opciones(), BorderLayout.WEST);
         c.add(new Panel_inferior(),BorderLayout.CENTER);
 
         this.setBackground(Color.red);
+=======
         c.add(campo,BorderLayout.NORTH);
         c.add(text,BorderLayout.SOUTH);
         c.add(b,BorderLayout.EAST);
         c.add(p,BorderLayout.CENTER);        
-
+>>>>>>> 729789700995c5c15096f56f0b3f3133ac7538f6:PetMed/src/com/petmed/view/Consultas.java
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(750,550);
@@ -51,11 +52,14 @@ public class Aplication extends JFrame{
     }
     
     public static void main(String args[]){
-        Frame_autentificacion ventana = new Frame_autentificacion();
+<<<<<<< HEAD:PetMed/src/com/petmed/view/Aplication.java
+//        Frame_autentificacion ventana = new Frame_autentificacion();
         aplication = new Aplication();
+=======
         Consultas =new Consultas();
         new Login();
         new MainWindow();
+>>>>>>> 729789700995c5c15096f56f0b3f3133ac7538f6:PetMed/src/com/petmed/view/Consultas.java
     }
     
 }
