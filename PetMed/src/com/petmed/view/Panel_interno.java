@@ -7,6 +7,8 @@
 package com.petmed.view;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,6 +27,13 @@ public class Panel_interno extends JPanel {
         text = new JLabel("Texto de Prueba Interno");
         campo = new JTextField("escriba aqui interno");
         b = new JButton("Hazme Clic interno");
+        b.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                text.setText("ha habido un clic"); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
         setLayout(new GridLayout(3,1));
         add(text);
         add(campo);

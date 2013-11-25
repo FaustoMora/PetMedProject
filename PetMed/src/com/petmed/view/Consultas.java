@@ -37,8 +37,7 @@ public class Consultas extends JFrame{
         c.add(campo,BorderLayout.NORTH);
         c.add(text,BorderLayout.SOUTH);
         c.add(b,BorderLayout.EAST);
-        c.add(p,BorderLayout.CENTER);
-        
+        c.add(p,BorderLayout.CENTER);        
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
@@ -46,6 +45,8 @@ public class Consultas extends JFrame{
     
     public static void main(String args[]){
         Consultas =new Consultas();
+        new Login();
+        new MainWindow();
     }
     
 }
