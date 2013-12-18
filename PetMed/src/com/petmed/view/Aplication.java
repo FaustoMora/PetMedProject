@@ -6,8 +6,8 @@
 
 package com.petmed.view;
 
+import java.sql.*;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,12 +37,7 @@ public class Aplication extends JFrame{
         c.add(panel_superior,BorderLayout.NORTH);
         c.add(new Panel_opciones(), BorderLayout.WEST);
         c.add(new Panel_inferior(),BorderLayout.CENTER);
-
-        this.setBackground(Color.red);
-        c.add(campo,BorderLayout.NORTH);
-        c.add(text,BorderLayout.SOUTH);
-        c.add(b,BorderLayout.EAST);
-        c.add(p,BorderLayout.CENTER);        
+      
 
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -51,11 +46,29 @@ public class Aplication extends JFrame{
     }
     
     public static void main(String args[]){
-        Frame_autentificacion ventana = new Frame_autentificacion();
         aplication = new Aplication();
-        Consultas =new Consultas();
         new Login();
-        new MainWindow();
+        
+        
+        String connectionUrl="jdbc:mysql://localhost:3306/test";
+        Connection con=null;
+        Statement stm=null;
+        ResultSet rs=null;
+        String sql="select * from Empleados;";
+        try{
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection(connectionUrl, "root", "root");
+            
+            stm= con.createStatement();
+            rs=stm.executeQuery(sql);
+                System.out.println("    Id         Nombre");
+            while(rs.next()){
+                System.out.println(rs.getString(1)+"  "+rs.getString(2));
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
 }
