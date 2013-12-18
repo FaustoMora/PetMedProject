@@ -22,7 +22,7 @@ import javax.swing.SwingConstants;
  * @author sjronqui
  */
 public class Panel_superior extends JPanel{
-    final static String path="/home/sjronqui/PetMedProject/Images/";
+    final static String path="../Images/";
     Color color_usuario = Color.LIGHT_GRAY;
     JToolBar herramientas;   
     JPanel pnl_usuario;
