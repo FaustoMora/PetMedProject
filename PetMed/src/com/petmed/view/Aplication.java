@@ -48,7 +48,12 @@ public class Aplication extends JFrame{
     public static void main(String args[]){
         aplication = new Aplication();
         new Login();
+        Conexion();
         
+        
+    }
+    
+    private static void Conexion(){
         
         String connectionUrl="jdbc:mysql://localhost:3306/test";
         Connection con=null;

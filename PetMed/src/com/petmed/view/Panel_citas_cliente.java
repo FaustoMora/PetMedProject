@@ -11,7 +11,10 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -37,7 +40,16 @@ public class Panel_citas_cliente extends JPanel{
         JLabel lbl_cliente= new JLabel("Cliente:");
         
         JTextField txt_cliente=new JTextField(25);
-                 
+        txt_cliente.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
+           
         String columNames[] = {"Fecha","Hora","Mascota","Estado"};
         
         tabla = new DefaultTableModel(columNames,30);
@@ -68,5 +80,7 @@ public class Panel_citas_cliente extends JPanel{
         gbc.gridy=2;
         this.add(panel,gbc);
     } 
+    
+    
     
 }

@@ -6,6 +6,7 @@
 
 package com.petmed.view;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -36,8 +37,8 @@ public class Panel_consultas_fecha extends JPanel{
         JLabel lbl_de= new JLabel("Desde:");
         JLabel lbl_hasta= new JLabel("Hasta:");
         
-        JTextField txt_de=new JTextField(15);
-        JTextField txt_hasta=new JTextField(15);
+        JDateChooser txt_de=new JDateChooser();
+        JDateChooser txt_hasta=new JDateChooser();
                  
         String columNames[] = {"#consulta","Fecha Consulta","Medico","cliente","mascota"};
         

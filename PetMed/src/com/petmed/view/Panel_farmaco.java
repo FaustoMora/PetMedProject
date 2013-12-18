@@ -10,9 +10,11 @@ import java.awt.Choice;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -33,7 +35,26 @@ public class Panel_farmaco extends JPanel{
         JLabel lbl_auxiliar = new JLabel("por cada");
         
         JTextField txt_nombre=new JTextField(15);
+        txt_nombre.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
+        
         JTextField txt_cantidad= new JTextField(4);
+        txt_cantidad.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[0-9]+(\\.[0-9]+)*")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
         
         Choice ch_presentacion=new Choice();
         ch_presentacion.add("Jarabe");

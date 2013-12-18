@@ -11,7 +11,10 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -36,6 +39,15 @@ public class Panel_modificar_cliente extends JPanel{
         JLabel lbl_nombre= new JLabel("Nombre del Cliente:");
         
         JTextField txt_nombre=new JTextField(15);
+        txt_nombre.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
                  
         String columNames[] = {"Nombre","Dirección","Nombre Mascota" ,"Especie" ,"Fecha de registro"};
         

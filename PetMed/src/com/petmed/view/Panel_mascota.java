@@ -6,16 +6,19 @@
 
 package com.petmed.view;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.Choice;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Date;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -37,10 +40,28 @@ public class Panel_mascota extends JPanel{
         JLabel lbl_raza = new JLabel("Raza:");
         JLabel lbl_sexo = new JLabel("Sexo:");
         
-        Date fecha= new Date();
-        JTextField txt_nacimiento = new JTextField(fecha.toString());
+
+        JDateChooser txt_nacimiento = new JDateChooser();
         JTextField txt_nombre = new JTextField(20);
+        txt_nombre.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
         JTextField txt_raza = new JTextField(10);
+        txt_raza.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
         
 
         JRadioButton rb_macho = new JRadioButton("Macho");

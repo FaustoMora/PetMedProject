@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.*;
@@ -37,9 +36,8 @@ public class Panel_nuevos_clientes extends JPanel{
         JLabel lbl_de= new JLabel("Desde:");
         JLabel lbl_hasta= new JLabel("Hasta:");
         
-       //JTextField txt_de=new JTextField(15);
+        
         JDateChooser txt_de=new JDateChooser();
-//        JTextField txt_hasta=new JTextField(15);
         JDateChooser txt_hasta=new JDateChooser();
         
         String columNames[] = {"#" ,"nombre" ,"Fecha de registro" ,"Nombre Mascota" ,"Especie" ,"Motivo de primera visita"};

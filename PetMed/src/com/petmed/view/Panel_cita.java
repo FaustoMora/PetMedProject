@@ -6,13 +6,18 @@
 
 package com.petmed.view;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -32,10 +37,39 @@ public class Panel_cita extends JPanel{
         JLabel lbl_medico = new JLabel("Médico:");
         
         Date fecha= new Date();
-        JTextField txt_fecha = new JTextField(fecha.toString());
+        JDateChooser txt_fecha = new JDateChooser();
         JTextField txt_nombre = new JTextField(20);
-        JTextField txt_hora = new JTextField(5);
+        txt_nombre.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
+        
+        JTextField txt_hora = new JTextField(6);
+        txt_hora.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[0-9]{2}\\:{1}[0-9]{2}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
+        
         JTextField txt_medico = new JTextField(20);
+        txt_medico.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
         
         JButton btn_cancelar = new JButton("Cancelar");
         JButton btn_guardar = new JButton("Guardar");

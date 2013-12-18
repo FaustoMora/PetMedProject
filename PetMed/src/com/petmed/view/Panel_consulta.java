@@ -13,12 +13,15 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -48,14 +51,6 @@ public class Panel_consulta extends JPanel{
         lst_sintomas.setVisibleRowCount(3);
         lst_sintomas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK),"Síntomas:"));
         
-//        JScrollPane sp_sintomas = new JScrollPane(lst_sintomas);
-//        lst_sintomas.setSize(200, 100);
-        
-//        JScrollPane sp_sintoma= new JScrollPane();
-//        sp_sintoma.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK, 2),"Síntomas:"));
-//        sp_sintoma.setOpaque(false);
-//        sp_sintoma.add(lst_sintomas);
-//        sp_sintoma.setPreferredSize(new Dimension(100, 100));
         
         JLabel lbl_fecha = new JLabel("Fecha de consulta:");
         JLabel lbl_hora = new JLabel("Hora:");
@@ -68,14 +63,52 @@ public class Panel_consulta extends JPanel{
                
         Calendar calendario = new GregorianCalendar();
         
-        JTextField txt_fecha = new JTextField(""+calendario.get(Calendar.DAY_OF_MONTH)+"/"+calendario.get(Calendar.MONTH)+"/"+calendario.get(Calendar.YEAR));
-        JTextField txt_hora = new JTextField(""+calendario.get(Calendar.HOUR_OF_DAY)+":"+calendario.get(Calendar.MINUTE));
-        JTextField txt_motivo = new JTextField(5);
+        JLabel txt_fecha = new JLabel(""+calendario.get(Calendar.DAY_OF_MONTH)+"/"+calendario.get(Calendar.MONTH)+"/"+calendario.get(Calendar.YEAR));
+        JLabel txt_hora = new JLabel(""+calendario.get(Calendar.HOUR_OF_DAY)+":"+calendario.get(Calendar.MINUTE));
+        JTextField txt_motivo = new JTextField(15);
+        txt_motivo.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
+        
         JTextField txt_peso = new JTextField(5);
-        JTextField txt_temperatura = new JTextField(5);
-        JTextArea txt_descripcion = new JTextArea(3,10);
-        JTextField txt_tratamiento = new JTextField(5);
+        txt_peso.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[0-9]+(\\.[0-9]+)*")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
+        
+        JTextField txt_temperatura = new JTextField(3);
+        txt_temperatura.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[0-9]+(\\.[0-9]+){0,1}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
+        
+        JTextArea txt_descripcion = new JTextArea(3,10);        
         JTextField txt_diagnostico = new JTextField(5);
+        txt_diagnostico.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                     JOptionPane.showMessageDialog(null,"Válido");
+                    }else{
+                    JOptionPane.showMessageDialog(null,"Dato no válido");
+                }
+            }
+        });
                
         JButton btn_tratamiento = new JButton(new ImageIcon("/home/sjronqui/PetMedProject/Images/tratamiento.png"));
         
