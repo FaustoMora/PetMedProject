@@ -157,7 +157,7 @@ public class Panel_consulta extends JPanel{
         gbc.gridwidth=GridBagConstraints.REMAINDER;
         gbc.gridheight=3;
         txt_descripcion.setLineWrap(true);
-        txt_descripcion.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK));
+        txt_descripcion.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY));
         this.add(txt_descripcion,gbc);
         
         gbc.gridheight=1;

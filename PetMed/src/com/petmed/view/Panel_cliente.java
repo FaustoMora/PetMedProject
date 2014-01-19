@@ -44,17 +44,18 @@ public class Panel_cliente extends JPanel{
         JTextField txt_nombre = new JTextField(20);
         txt_nombre.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z\\s\\']{3,}")){
                      JOptionPane.showMessageDialog(null,"Válido");
                     }else{
                     JOptionPane.showMessageDialog(null,"Dato no válido");
                 }
             }
         });
+        
         JTextField txt_apellido = new JTextField(20);
         txt_apellido.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z\\s\\']{3,}")){
                      JOptionPane.showMessageDialog(null,"Válido");
                     }else{
                     JOptionPane.showMessageDialog(null,"Dato no válido");

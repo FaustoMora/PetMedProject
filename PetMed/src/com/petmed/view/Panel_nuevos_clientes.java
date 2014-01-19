@@ -38,7 +38,9 @@ public class Panel_nuevos_clientes extends JPanel{
         
         
         JDateChooser txt_de=new JDateChooser();
+        txt_de.getDateEditor().setEnabled(false);
         JDateChooser txt_hasta=new JDateChooser();
+        txt_hasta.getDateEditor().setEnabled(false);
         
         String columNames[] = {"#" ,"nombre" ,"Fecha de registro" ,"Nombre Mascota" ,"Especie" ,"Motivo de primera visita"};
         
