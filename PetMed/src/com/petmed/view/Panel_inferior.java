@@ -33,12 +33,12 @@ public class Panel_inferior extends JPanel{
             final String trata="tratamiento";
             final String nclient="nuevo_cliente";
             
-//                  
-            this.add(new Panel_consulta());
+                  
+            //this.add(new Panel_consulta());
             this.add(new Panel_cliente());
             this.add(new Panel_cita());
             this.add(new Panel_farmaco());
-//            this.add(new Panel_tratamiento());
+            this.add(new Panel_tratamiento());
             this.add(new Panel_mascota()); 
             this.add(new Panel_modificar_cliente());
             this.add(new Panel_consultas_medico());
