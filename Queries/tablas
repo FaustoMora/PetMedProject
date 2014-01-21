@@ -2,7 +2,7 @@ create table if not exists Cliente (id integer auto_increment primary key,
 									nombre varchar(45),
 									direccion varchar(45),
 									telefono integer,
-									fecha_registro date);/*en el modelo lógico fecha_registro está como tipo varchar*/
+									fecha_registro date);
 
 create table if not exists Mascota(id integer auto_increment primary key,
 									nombre varchar(45),
@@ -14,25 +14,25 @@ create table if not exists Mascota(id integer auto_increment primary key,
 create table if not exists Cliente_mascota(id integer auto_increment primary key,
 											cliente_id integer not null,
 											mascota_id integer not null,
-											foreign key (cliente_id) REFERENCES Cliente(id),
-											foreign key (mascota_id) references Mascota(id));
+											foreign key (cliente_id) REFERENCES Cliente(id) on delete cascade,
+											foreign key (mascota_id) references Mascota(id) on delete cascade);
 
 create table if not exists Caracteristica(id integer auto_increment primary key,
 											mascota_id integer not null,
-											foreign key(mascota_id) references Mascota(id));
+											foreign key(mascota_id) references Mascota(id) on delete cascade);
 
 create table if not exists Fisiologia(id integer auto_increment primary key,
 										tamaño integer not null,
 										peso integer not null,
 										fecha_ingreso date not null,
 										mascota_id integer not null,
-										foreign key(mascota_id) references Mascota(id));
+										foreign key(mascota_id) references Mascota(id) on delete cascade);
 
 create table if not exists Cita(id integer auto_increment primary key,
 								fecha_cita date not null,
 								hora timestamp not null,
 								cliente_id integer not null,
-								foreign key (cliente_id) references Cliente(id));
+								foreign key (cliente_id) references Cliente(id) on delete cascade);
 
 create table if not exists Medico(id integer auto_increment primary key,
 									nombre varchar(45)not null,
@@ -48,15 +48,15 @@ create table if not exists Consulta(id integer auto_increment primary key,
 									medico_id integer not null,
 									tratamiento_id integer null,
 									mascota_id integer not null,
-									foreign key(medico_id) references Medico(id),
-									foreign key(tratamiento_id) references Tratamiento(id),
-									foreign key(mascota_id) references Mascota(id));
+									foreign key(medico_id) references Medico(id) on delete cascade,
+									foreign key(tratamiento_id) references Tratamiento(id) on delete cascade,
+									foreign key(mascota_id) references Mascota(id) on delete cascade);
 
 create table if not exists Vacuna(id integer auto_increment primary key,
 									fecha_vacuancion date not null,
 									tipo varchar(39) not null,
 									mascota_id integer not null,
-									foreign key (mascota_id) references Mascota(id));
+									foreign key (mascota_id) references Mascota(id)on delete cascade);
 
 create table if not exists Sintoma(id integer auto_increment primary key,
 									descripcion varchar(30) not null);
@@ -64,8 +64,8 @@ create table if not exists Sintoma(id integer auto_increment primary key,
 create table if not exists Consulta_sintoma(id integer auto_increment primary key,
 											consulta_id integer not null,
 											sintoma_id integer not null,
-											foreign key (consulta_id) references Consulta(id),
-											foreign key (sintoma_id) references Sintoma(id));
+											foreign key (consulta_id) references Consulta(id) on delete cascade,
+											foreign key (sintoma_id) references Sintoma(id)on delete cascade);
 
 create table if not exists Diagnostico (id integer auto_increment primary key,
 										patologia varchar(45) not null);		
@@ -73,8 +73,8 @@ create table if not exists Diagnostico (id integer auto_increment primary key,
 create table if not exists Diagnostico_consulta(id integer auto_increment primary key,
 												consulta_id integer not null,
 												diagnostico_id integer not null,
-												foreign key (consulta_id) references Consulta(id),
-												foreign key (diagnostico_id) references Diagnostico(id));
+												foreign key (consulta_id) references Consulta(id)on delete cascade,
+												foreign key (diagnostico_id) references Diagnostico(id)on delete cascade);
 
 create table if not exists Farmaco (id integer auto_increment primary key,
 									nombre varchar(45) not null,
@@ -84,5 +84,6 @@ create table if not exists Farmaco (id integer auto_increment primary key,
 create table if not exists Tratamiento_farmaco(id integer auto_increment primary key,
 												tratamiento_id integer not null,
 												farmaco_id integer not null,
-												foreign key(tratamiento_id) references Tratamiento(id),
-												foreign key(farmaco_id) references Farmaco(id));
+												foreign key(tratamiento_id) references Tratamiento(id)on delete cascade,
+												foreign key(farmaco_id) references Farmaco(id)on delete cascade);
+

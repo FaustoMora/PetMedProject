@@ -13,8 +13,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -36,8 +34,8 @@ public class Panel_cita extends JPanel{
         JLabel lbl_hora = new JLabel("Hora:");
         JLabel lbl_medico = new JLabel("Médico:");
         
-        Date fecha= new Date();
         JDateChooser txt_fecha = new JDateChooser();
+        txt_fecha.getDateEditor().setEnabled(false);
         JTextField txt_nombre = new JTextField(20);
         txt_nombre.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){

@@ -33,6 +33,7 @@ public class Panel_inferior extends JPanel{
             final String trata="tratamiento";
             final String nclient="nuevo_cliente";
             
+
                   
             //this.add(new Panel_consulta());
             this.add(new Panel_cliente());
@@ -48,6 +49,7 @@ public class Panel_inferior extends JPanel{
             this.add(new Panel_citas_cliente());
             this.add(new Panel_citas_fechas());
             this.add(new Panel_nuevos_clientes(),nclient);
+
            
         }
         
