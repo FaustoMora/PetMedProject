@@ -11,35 +11,58 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
+
 
 /**
  *
  * @author Ivan
  */
-public class ClienteDAO implements BaseDAO{
-    private String connection;
+public class ClienteDAO implements BaseDAO{     
     
-    private static void Conexion(){
+    String connectionUrl="jdbc:mysql://localhost:3306/PetMed";
+    public  Connection con=null;
+    
+    private void conexion(){
         
-        String connectionUrl="jdbc:mysql://localhost:3306/test";
-        Connection con=null;
-        Statement stm=null;
-        ResultSet rs=null;
-        String sql=";";
+        
+       
         try{
+             System.out.println("conexion1");
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             con = DriverManager.getConnection(connectionUrl, "root", "root");
+            System.out.println("conexion");
             
-            stm= con.createStatement();
-            rs=stm.executeQuery(sql);
-                System.out.println("    Id         Nombre");
-            while(rs.next()){
-                System.out.println(rs.getString(1)+"  "+rs.getString(2));
-            }
             
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    public void storage(String name,String direccion,int phone,Date date){
+        conexion();
+          
+        
+        Statement stm=null;
+        ResultSet rs=null;
+        //String sql="insert into Cliente(id,nombre,direccion,telefono,fecha_registro) values(null,\""+name+"\",\""+direccion+"\","+phone+",current_Date);";
+        String sql="call nuevoCliente(\""+name+"\",\""+direccion+"\","+phone+",current_Date)";
+        //String sql="select * from liente"
+        try{
+            
+            
+            stm= con.createStatement();
+            stm.execute(sql);
+                
+//            while(rs.next()){
+//                System.out.println(rs.getString(1)+"  "+rs.getString(2));
+//            }
+
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
             
             

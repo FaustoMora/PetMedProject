@@ -6,6 +6,7 @@
 
 package com.petmed.view;
 
+import com.petmed.models.ClienteDAO;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -13,6 +14,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.sql.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,10 +27,12 @@ import javax.swing.JTextField;
  * @author sjronqui
  */
 public class Panel_cliente extends JPanel{
-    
+    ClienteDAO cd;
     public Panel_cliente (){
+        cd=new ClienteDAO();
         GridBagLayout layout= new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
+        
         
         this.setLayout(layout);
         
@@ -41,21 +45,20 @@ public class Panel_cliente extends JPanel{
         Calendar calendario = new GregorianCalendar();
         JLabel txt_fecha = new JLabel(""+calendario.get(Calendar.DAY_OF_MONTH)+"/"+calendario.get(Calendar.MONTH)+"/"+calendario.get(Calendar.YEAR));
         
-        JTextField txt_nombre = new JTextField(20);
+        final JTextField txt_nombre = new JTextField(20);
         txt_nombre.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z\\s\\']{3,}")){
-                     JOptionPane.showMessageDialog(null,"Válido");
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
+                     JOptionPane.showMessageDialog(null,"Válido");                    
                     }else{
                     JOptionPane.showMessageDialog(null,"Dato no válido");
                 }
             }
         });
-        
-        JTextField txt_apellido = new JTextField(20);
+        final JTextField txt_apellido = new JTextField(20);
         txt_apellido.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z\\s\\']{3,}")){
+                if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
                      JOptionPane.showMessageDialog(null,"Válido");
                     }else{
                     JOptionPane.showMessageDialog(null,"Dato no válido");
@@ -63,7 +66,7 @@ public class Panel_cliente extends JPanel{
             }
         });
         
-        JTextField txt_direccion = new JTextField(25);
+        final JTextField txt_direccion = new JTextField(25);
         txt_direccion.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]+[a-zA-Z0-9\\.*\\s*]{3.}")){
@@ -73,7 +76,7 @@ public class Panel_cliente extends JPanel{
                 }
             }
         });
-        JTextField txt_telefono = new JTextField(10);
+        final JTextField txt_telefono = new JTextField(10);
         txt_telefono.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 if(((JTextField)e.getSource()).getText().matches("[0-9]{7}|[0-9]{10}")){
@@ -87,6 +90,14 @@ public class Panel_cliente extends JPanel{
         
         JButton btn_cancelar = new JButton("Cancelar");
         JButton btn_guardar = new JButton("Guardar");
+        btn_guardar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {               
+                Date d=new Date(100000);
+                cd.storage("HOLA","MUNDO",12345567, d );
+            }
+        });
         JPanel pnl_boton= new JPanel(new FlowLayout());
         
         gbc.fill= GridBagConstraints.HORIZONTAL;

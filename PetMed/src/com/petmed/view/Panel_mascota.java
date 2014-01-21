@@ -42,7 +42,6 @@ public class Panel_mascota extends JPanel{
         
 
         JDateChooser txt_nacimiento = new JDateChooser();
-        txt_nacimiento.getDateEditor().setEnabled(false);
         JTextField txt_nombre = new JTextField(20);
         txt_nombre.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
