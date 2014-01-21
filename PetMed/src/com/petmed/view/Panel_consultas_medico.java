@@ -32,13 +32,12 @@ public class Panel_consultas_medico extends JPanel{
         gbc.insets=new Insets(0,0,5,5);
         
                  
-        String columNames[] = {"Consultas","Usearname","Médico"};
+        String columNames[] = {"Total de consultas","Usearname"};
         
         tabla = new DefaultTableModel(columNames,30);
         
         dtm = new JTable(tabla);
-        
-        dtm.setPreferredScrollableViewportSize(new Dimension(350,300));
+        dtm.setPreferredScrollableViewportSize(new Dimension(250,300));
         JScrollPane scroll = new JScrollPane(dtm);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

@@ -47,17 +47,22 @@ public class Aplication extends JFrame{
     
     public static void main(String args[]){
         aplication = new Aplication();
-//        new Login();
+        new Login();
+        //Conexion();
         
         
-//      Probando la conexión
+    }
+    
+    private static void Conexion(){
         
+        String connectionUrl="jdbc:mysql://localhost:3306/test";
         Connection con=null;
         Statement stm=null;
         ResultSet rs=null;
         String sql="select * from Empleados;";
         try{
-            con = Conexion("test","root","root");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            con = DriverManager.getConnection(connectionUrl, "root", "root");
             
             stm= con.createStatement();
             rs=stm.executeQuery(sql);
@@ -68,20 +73,6 @@ public class Aplication extends JFrame{
             
         }catch(Exception e){
             e.printStackTrace();
-        }
-    }
-    
-    private static Connection Conexion(String bd, String user, String password){
-        
-        String connectionUrl="jdbc:mysql://localhost:3306/"+bd;
-        Connection con=null;
-        try{
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection(connectionUrl, user, password);
-            return con;
-        }catch(Exception e){
-            e.printStackTrace();
-            return null;
         }
     }
     
