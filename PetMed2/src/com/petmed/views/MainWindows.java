@@ -8,7 +8,6 @@ package com.petmed.views;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
 /**
  *
@@ -18,6 +17,7 @@ public class MainWindows extends JFrame {
     JPanel panel;
     
     public MainWindows(){
+        super("PetMed v2.0");
         panel = new JPanel();
         MainTabbedPanel c=new MainTabbedPanel();
         InnerTabbedPanel i=new InnerTabbedPanel();
@@ -26,7 +26,7 @@ public class MainWindows extends JFrame {
         c.addTab("test","cliente", i);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
+        //pack();
     }
     
     public static void main(String args[]){

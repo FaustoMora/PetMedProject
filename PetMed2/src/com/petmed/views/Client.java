@@ -7,14 +7,15 @@
 package com.petmed.views;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -24,19 +25,26 @@ public class Client extends PanelBasic{
     private Panel_cliente client_panel;
     
     
+    
     public Client(){
         super();
         setLayout(new BorderLayout());
         client_panel= new Panel_cliente();
+        popUpWindow.add(client_panel);
+        popUpWindow.pack();
         init();
         JPanel panelButtons= new JPanel(new GridLayout(1,3));
+        
         JPanel bar= new JPanel(new GridLayout(2,1));
         bar.add(searchPanel);
         JPanel temp = new JPanel(new BorderLayout());
         temp.add(panelButtons,BorderLayout.EAST);
+        temp.setSize(new Dimension(20,40));
         bar.add(temp);
         add(bar,BorderLayout.NORTH);
         add(new JScrollPane(data),BorderLayout.CENTER);
+        
+        
         
         panelButtons.add(newButton);
         panelButtons.add(editButton);
@@ -48,7 +56,21 @@ public class Client extends PanelBasic{
     
     @Override
     protected void init() {
+        newButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                popUpWindow.setVisible(true);
+            }
+        });
         
+        editButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //data.getSele
+           }
+        });
         popUpWindow.add(client_panel);
         columnNames=new String[5];
         columnNames[0]="Fecha de registro";

@@ -7,7 +7,7 @@
 package com.petmed.views;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -32,12 +32,13 @@ public abstract class PanelBasic extends JPanel{
         
         newButton = new JButton("Nuevo");
         editButton = new JButton("Editar");
-        deleteButton = new JButton("borrar");
+        deleteButton = new JButton("Borrar");
         popUpWindow = new JFrame();
         popUpWindow.setVisible(false);
         popUpWindow.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         search = new JTextField(20);
-        searchButton = new JButton("Buscar");        
+        searchButton = new JButton("Buscar");     
+        
         searchPanel = new JPanel(new BorderLayout());
         searchPanel.add(search,BorderLayout.CENTER);
         searchPanel.add(searchButton,BorderLayout.EAST);        
