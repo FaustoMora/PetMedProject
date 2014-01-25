@@ -27,7 +27,7 @@ public class MainTabbedPanel extends JTabbedPane{
     
     public void addTab(String name,String image,Container c){
         ImageIcon icono_cliente = new ImageIcon(path+image+".png");        
-        super.addTab(image, icono_cliente, c);
+        super.addTab(name, icono_cliente, c);
     
     }
     

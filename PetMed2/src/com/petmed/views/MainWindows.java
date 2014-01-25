@@ -15,18 +15,33 @@ import javax.swing.JPanel;
  */
 public class MainWindows extends JFrame {
     JPanel panel;
+    MainTabbedPanel c;
     
     public MainWindows(){
         super("PetMed v2.0");
         panel = new JPanel();
-        MainTabbedPanel c=new MainTabbedPanel();
-        InnerTabbedPanel i=new InnerTabbedPanel();
-        getContentPane().add(c);
-        i.addTab("prueba", new Client());
-        c.addTab("test","cliente", i);
+        c=new MainTabbedPanel();
+        populateClient();
+        populatePet();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //pack();
+        pack();
+    }
+    
+    public void populateClient(){
+        
+        InnerTabbedPanel i=new InnerTabbedPanel();
+        getContentPane().add(c);
+        i.addTab("Administrar", new Client());
+        c.addTab("Cliente","cliente", i);    
+    }
+    
+    public void populatePet(){
+        
+        InnerTabbedPanel i=new InnerTabbedPanel();
+        getContentPane().add(c);
+        i.addTab("Administrar", new Pet());
+        c.addTab("Mascota","mascota", i);    
     }
     
     public static void main(String args[]){
