@@ -1,3 +1,6 @@
+create database petmed;
+use petmed;
+
 create table if not exists Cliente (id integer auto_increment primary key,
 									nombre varchar(45),
 									direccion varchar(45),
@@ -9,13 +12,11 @@ create table if not exists Mascota(id integer auto_increment primary key,
 									especie varchar(45),
 									raza varchar(45),
 									fecha_nacimiento date,
-									sexo char);
+									sexo char,
+									cliente_id integer not null,
+									foreign key(cliente_id) references cliente(id));
 
-create table if not exists Cliente_mascota(id integer auto_increment primary key,
-											cliente_id integer not null,
-											mascota_id integer not null,
-											foreign key (cliente_id) REFERENCES Cliente(id),
-											foreign key (mascota_id) references Mascota(id));
+
 
 create table if not exists Caracteristica(id integer auto_increment primary key,
 											mascota_id integer not null,
@@ -30,9 +31,11 @@ create table if not exists Fisiologia(id integer auto_increment primary key,
 
 create table if not exists Cita(id integer auto_increment primary key,
 								fecha_cita date not null,
-								hora timestamp not null,
+								hora time not null,
 								cliente_id integer not null,
-								foreign key (cliente_id) references Cliente(id));
+								medico_id integer not null,
+								foreign key (cliente_id) references Cliente(id)
+								foreign key (medico_id) references Medico(id));
 
 create table if not exists Medico(id integer auto_increment primary key,
 									nombre varchar(45)not null,
@@ -108,22 +111,148 @@ END ;
 // delimiter ;
 /*----------------------------------------------------------------------------*/
 
-/*---------------------PROCEDURE PARA ENCONTRAR CLIENTE--------------*/
-
+/*---------------------PROCEDURE PARA ELIMINAR CLIENTE--------------*/
 delimiter //
-create procedure find_cliente(in nom VARCHAR(45))
+create procedure delete_cliente(in nom VARCHAR(45))
 begin
-SELECT count(*) from cliente WHERE nombre like nom;
+delete from cliente where nombre like nom;
 END ;
 // delimiter ;
 /*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA BUSCAR CLIENTE--------------*/
+delimiter //
+create procedure find_cliente(in nom VARCHAR(45))
+begin
+SELECT distinct id from cliente WHERE nombre like nom;
+END ;
+// delimiter ;
+/*----------------------------------------------------------------------------*/
+drop procedure find_cliente;
+/*---------------------PROCEDURE PARA INGRESAR MASCOTA--------------*/
+delimiter //
+create procedure insert_mascota(in nom varchar(45), in esp varchar(45), in raza varchar(45), in birth date, in sexo char, in dueño integer)
+begin 
+insert into mascota values (id,nom,esp,raza,birth,sexo,dueño);
+end;
+//delimiter;
+/*----------------------------------------------------------------------------*/
+/*---------------------PROCEDURE PARA UPDATE MASCOTA--------------*/
+delimiter //
+create procedure update_mascota( in nom varchar(45), in esp varchar(45), in rz varchar(45), in birth date, in sx char, in id_dueno integer)
+begin 
+update mascota set especie=esp , raza = rz , fecha_nacimiento = birth , sexo = sx where (nombre like nom) and cliente_id = id_dueno;
+end;
+//delimiter;
+/*----------------------------------------------------------------------------*/
+/*---------------------PROCEDURE PARA ELIMINAR MASCOTA--------------*/
+delimiter //
+create procedure delete_mascota( in nom varchar(45), in id_dueno integer)
+begin
+delete from mascota where nombre like nom and cliente_id = id_dueno; 
+end;
+//delimiter;
+/*----------------------------------------------------------------------------*/
+
+
+/*---------------------PROCEDURE PARA ENCONTRAR MASCOTA--------------*/
+delimiter //
+create procedure find_mascota(in nom varchar(45),in id_dueno integer)
+begin
+select distinct id from mascota where (cliente_id =  id_dueno) and (nombre like nom);
+end;
+// delimiter ;
+
+
+/*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA INGRESAR MEDICO--------------*/
+
+/*----------------------------------------------------------------------------*/
+/*---------------------PROCEDURE PARA BUSCAR MEDICO--------------*/
+delimiter //
+create procedure find_medico(in nom varchar(45))
+begin
+select distinct id from medico where nombre= nom;
+end;
+// delimiter;
+/*----------------------------------------------------------------------------*/
+/*---------------------PROCEDURE PARA INGRESAR CITA--------------*/
+delimiter //
+create procedure insert_cita(in id int, in fecha_reg date, in hora_reg time, in cliente_id integer, in medico_id integer)
+begin
+insert into cita values(id,fecha_reg,hora_reg,cliente_id,medico_id);
+end;
+// delimiter;
+
+/*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA MODIFICAR CITA--------------*/
+delimiter //
+create procedure update_cita(in fecha_reg date, in hora_reg time, in cliente integer, in medico integer)
+begin
+update cita set fecha_cita=fecha_reg, hora = hora_reg where cliente_id=cliente and medico_id=medico;
+end;
+// delimiter;
+/*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA ELIMINAR CITA--------------*/
+delimiter //
+create procedure delete_cita(in cliente integer, in medico integer)
+begin
+delete from cita where cliente_id=cliente and medico_id=medico;
+end;
+// delimiter;
+/*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA ENCONTRAR CITA--------------*/
+delimiter //
+create procedure find_cita(in cliente integer, in medico integer)
+begin
+select id from cita where cliente_id = cliente and medico_id=medico;
+end;
+// delimiter;
+/*----------------------------------------------------------------------------*/
+
 
 /*---------------------PROCEDURE PARA INGRESAR FARMACO--------------*/
 
 delimiter //
-create procedure insert_farmaco(in id integer, in nom varchar(45), in pres varchar(45),	in concen varchar(45))
+create procedure insert_farmaco(in id integer, in nom varchar(45), in pres varchar(45),	in dosis varchar(45))
 begin
-INSERT INTO Farmaco VALUES(id,nom,pres,concen,fecha_registro); 
+INSERT INTO Farmaco VALUES(id,nom,pres,dosis); 
 END ;
 // delimiter ;
 /*----------------------------------------------------------------------------*/
+drop procedure insert_farmaco;
+
+/*---------------------PROCEDURE PARA UPDATE FARMACO--------------*/
+
+delimiter //
+create procedure update_farmaco(in nom varchar(45), in pres varchar(45), in dosis varchar(45))
+begin
+update farmaco set concentracion=dosis where nombre like nom and presentacion like pres;
+END ;
+// delimiter ;
+/*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA ELIMINAR FARMACO--------------*/
+
+delimiter //
+create procedure delete_farmaco(in nom varchar(45), in pres varchar(45))
+begin
+delete from farmaco where nombre like nom and presentacion like pres;
+END ;
+// delimiter ;
+/*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA ENCONTRAR FARMACO--------------*/
+
+delimiter //
+create procedure find_farmaco(in nom varchar(45), in pres varchar(45))
+begin
+select id from farmaco where nombre like nom and presentacion like pres;
+END ;
+// delimiter ;
+/*----------------------------------------------------------------------------*/
+
