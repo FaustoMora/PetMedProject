@@ -33,16 +33,11 @@ create table if not exists Cita(id integer auto_increment primary key,
 								fecha_cita date not null,
 								hora time not null,
 								cliente_id integer not null,
-								medico_id integer not null,
-								foreign key (cliente_id) references Cliente(id)
-								foreign key (medico_id) references Medico(id));
+								foreign key (cliente_id) references Cliente(id));
 
 create table if not exists Medico(id integer auto_increment primary key,
 									nombre varchar(45)not null,
-									telefono int not null);
-
-create table if not exists Tratamiento(id integer auto_increment primary key,
-										descripcion varchar(90)not null);
+									telefono integer not null);
 
 create table if not exists Consulta(id integer auto_increment primary key,
 									fecha_consulta date not null,
@@ -90,6 +85,66 @@ create table if not exists Tratamiento_farmaco(id integer auto_increment primary
 												foreign key(tratamiento_id) references Tratamiento(id),
 												foreign key(farmaco_id) references Farmaco(id));
 
+create table if not exists Tratamiento(id integer auto_increment primary key,
+										descripcion varchar(90)not null);
+
+/*---------------------PROCEDURE PARA INSERCION Tratamiento/Farmaco--------------*/
+delimiter //
+create procedure insert_tratamiento_farmaco (in id integer ,in trat_id integer, in farm_id integer)
+begin
+INSERT INTO tratamiento_farmaco VALUES(id,trat_id,farm_id); 
+END ; 
+//
+delimiter ;
+/*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA ELIMINAR Tratamiento/Farmaco--------------*/
+delimiter //
+create procedure delete_tratamiento_farmaco (in trat_id integer)
+begin
+delete from tratamiento_farmaco where tratamiento_id= trat_id; 
+END ; 
+//
+delimiter ;
+/*----------------------------------------------------------------------------*/
+drop procedure delete_tratamiento_farmaco;
+/*---------------------PROCEDURE PARA ENCONTRAR Tratamiento/Farmaco-------------*/
+delimiter //
+create procedure find_tratamiento_farmaco (in trat_id integer, in farm_id integer)
+begin
+select id from tratamiento_farmaco where tratamiento_id= trat_id and farmaco_id = farm_id;
+END ; 
+//
+delimiter ;
+/*----------------------------------------------------------------------------*/
+/*---------------------PROCEDURE PARA INSERCION Tratamiento--------------*/
+delimiter //
+create procedure insert_tratamiento (in id integer ,in des varchar(90))
+begin
+INSERT INTO tratamiento VALUES(id,des); 
+END ; 
+//
+delimiter ;
+/*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA ELIMINAR Tratamiento--------------*/
+delimiter //
+create procedure delete_tratamiento (in des varchar(90))
+begin
+delete from tratamiento where descripcion like des;
+END ; 
+//
+delimiter ;
+/*----------------------------------------------------------------------------*/
+/*---------------------PROCEDURE PARA ENCONTRAR Tratamiento--------------*/
+delimiter //
+create procedure find_tratamiento (in des varchar(90))
+begin
+select id from tratamiento where descripcion like des;
+END ; 
+//
+delimiter ;
+/*----------------------------------------------------------------------------*/
 												
 /*---------------------PROCEDURE PARA INSERCION EN TABLA CLIENTE--------------*/
 delimiter //
@@ -167,8 +222,30 @@ end;
 /*----------------------------------------------------------------------------*/
 
 /*---------------------PROCEDURE PARA INGRESAR MEDICO--------------*/
-
+delimiter //
+create procedure insert_medico(in id integer, in nombre varchar(45), in telefono integer)
+begin
+insert into medico values(id,nombre,telefono);
+end;
+// delimiter ;
 /*----------------------------------------------------------------------------*/
+/*---------------------PROCEDURE PARA MODIFICAR MEDICO--------------*/
+delimiter //
+create procedure update_medico(in nom varchar(45), in tlf integer)
+begin
+update medico set telefono=tlf where nombre like nom;
+end;
+// delimiter ;
+/*----------------------------------------------------------------------------*/
+/*---------------------PROCEDURE PARA ELIMINAR MEDICO--------------*/
+delimiter //
+create procedure delete_medico(in nom varchar(45))
+begin
+delete from medico where nombre like nom;
+end;
+// delimiter ;
+/*----------------------------------------------------------------------------*/
+
 /*---------------------PROCEDURE PARA BUSCAR MEDICO--------------*/
 delimiter //
 create procedure find_medico(in nom varchar(45))
