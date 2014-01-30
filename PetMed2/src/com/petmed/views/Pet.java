@@ -9,6 +9,8 @@ package com.petmed.views;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -61,6 +63,22 @@ public class Pet extends PanelBasic {
     @Override
     protected void init() {
         
+        newButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                popUpWindow.setVisible(true);
+            }
+        });
+        
+        editButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //data.getSele
+           }
+        });
+        
         columnNames=new String[3];        
         columnNames[0]="Nombre";
         columnNames[1]="Apellido";
@@ -79,7 +97,7 @@ public class Pet extends PanelBasic {
         columNames2[0]="Nombre";
         columNames2[1]="Fecha Nacimiento";
         columNames2[2]="Sexo";
-        columNames2[3]="Especia";
+        columNames2[3]="Especie";
         columNames2[4]="Raza";
         //Object[][] data1 = {{"joe","joe","21","joe","21"},{"fred","31","fred","31","fred"},{"mary","22","mary","22","mary"}};
         DefaultTableModel dtm2 = new DefaultTableModel(null, columNames2){

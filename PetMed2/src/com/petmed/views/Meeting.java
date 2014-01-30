@@ -11,7 +11,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,16 +21,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Ivan
  */
-public class Client extends PanelBasic{
-    private Panel_cliente client_panel;
+public class Meeting extends PanelBasic{
+    private Panel_cita panelCita;
+    private JTable data2;
+    private String columNames2[];
     
-    
-    
-    public Client(){
+    public Meeting(){
         super();
         setLayout(new BorderLayout());
-        client_panel= new Panel_cliente();
-        popUpWindow.add(client_panel);
+        panelCita= new Panel_cita();
+        popUpWindow.add(panelCita);
         popUpWindow.pack();
         init();
         JPanel panelButtons= new JPanel(new GridLayout(1,3));
@@ -43,9 +42,14 @@ public class Client extends PanelBasic{
         temp.setSize(new Dimension(20,40));
         bar.add(temp);
         add(bar,BorderLayout.NORTH);
-        JScrollPane panel1= new JScrollPane(data);
+        JPanel innerPane = new JPanel(new GridLayout());
+        JScrollPane panel1=new JScrollPane(data);
+        JScrollPane panel2=new JScrollPane(data2);
         panel1.setBorder(new TitledBorder("Clientes"));
-        add(panel1,BorderLayout.CENTER);
+        panel2.setBorder(new TitledBorder("Citas"));
+        innerPane.add(panel1);
+        innerPane.add(panel2);
+        add(innerPane,BorderLayout.CENTER);
         
         
         
@@ -54,11 +58,12 @@ public class Client extends PanelBasic{
         panelButtons.add(deleteButton);
         
         
+    
     }
 
-    
     @Override
     protected void init() {
+        
         newButton.addActionListener(new ActionListener() {
 
             @Override
@@ -75,12 +80,10 @@ public class Client extends PanelBasic{
            }
         });
         
-        columnNames=new String[5];
-        columnNames[0]="Fecha de registro";
-        columnNames[1]="Nombre";
-        columnNames[2]="Apellido";
-        columnNames[3]="Direccion";
-        columnNames[4]="Telefono";   
+        columnNames=new String[3];        
+        columnNames[0]="Nombre";
+        columnNames[1]="Apellido";
+        columnNames[2]="Telefono";   
         //Object[][] data1 = {{"joe","joe","21","joe","21"},{"fred","31","fred","31","fred"},{"mary","22","mary","22","mary"}};
         DefaultTableModel dtm = new DefaultTableModel(null, columnNames){
 
@@ -91,10 +94,28 @@ public class Client extends PanelBasic{
             
         };
         
+        columNames2=new String[2];        
+        columNames2[0]="Fecha";
+        columNames2[1]="Hora";
+//        columNames2[2]="Sexo";
+//        columNames2[3]="Especia";
+//        columNames2[4]="Raza";
+        //Object[][] data1 = {{"joe","joe","21","joe","21"},{"fred","31","fred","31","fred"},{"mary","22","mary","22","mary"}};
+        DefaultTableModel dtm2 = new DefaultTableModel(null, columNames2){
+
+            @Override
+            public boolean isCellEditable(int i, int i1) {
+                return false; //To change body of generated methods, choose Tools | Templates.
+            }
+            
+        };
+        
         data = new JTable(dtm);
-        
-        
+        data2 = new JTable(dtm2);
     }
+    
+
+    
 
     @Override
     public void setLiteners() {
@@ -115,7 +136,5 @@ public class Client extends PanelBasic{
     public void delete() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
     
 }

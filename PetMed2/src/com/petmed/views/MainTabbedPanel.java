@@ -22,6 +22,7 @@ public class MainTabbedPanel extends JTabbedPane{
 
     public MainTabbedPanel() {
         super();
+        
         setUI(new BasicTabbedPaneUI() );
     }
     
