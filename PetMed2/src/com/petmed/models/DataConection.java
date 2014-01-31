@@ -19,7 +19,7 @@ public  class DataConection{
 	public static void performConnection() {
 		
 		String user = "root";
-		String pass = null;
+		String pass = "1234";
 		  try{
 	            Class.forName("com.mysql.jdbc.Driver").newInstance();
 	            con = DriverManager.getConnection(connectionUrl, user,pass);

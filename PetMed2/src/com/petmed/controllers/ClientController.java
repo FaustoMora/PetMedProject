@@ -13,11 +13,10 @@ import java.util.LinkedList;
  *
  * @author Ivan
  */
-public class ClientController {
+public class ClientController implements BasicController {
     private int id;
-    private String name;
-    private String surname;
-    private Date registerDate;
+    private String name;    
+    private java.sql.Date registerDate;
     private int phone;
     private String address;
     private LinkedList<PetController> pets;
@@ -25,22 +24,30 @@ public class ClientController {
     public ClientController() {
         id =0;
         name= new String();
-        surname = new String();
-        registerDate =new Date();
+        registerDate =new java.sql.Date(0);
         phone = 0;
         address = new String();
         pets = new LinkedList<PetController>();
     }
 
-    public ClientController(int id, String name, String surname, Date registerDate, int phone, String address, LinkedList<PetController> pets) {
+    public ClientController(int id, String name, java.sql.Date registerDate, int phone, String address, LinkedList<PetController> pets) {
         this.id = id;
         this.name = name;
-        this.surname = surname;
         this.registerDate = registerDate;
         this.phone = phone;
         this.address = address;
         this.pets = pets;
     }
+    
+    public ClientController(int id, String name, java.sql.Date registerDate, int phone, String address) {
+        this.id = id;
+        this.name = name;
+        this.registerDate = registerDate;
+        this.phone = phone;
+        this.address = address;
+        
+    }
+
 
     public int getId() {
         return id;
@@ -58,19 +65,14 @@ public class ClientController {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+    
+   
 
     public Date getRegisterDate() {
         return registerDate;
     }
 
-    public void setRegisterDate(Date registerDate) {
+    public void setRegisterDate(java.sql.Date registerDate) {
         this.registerDate = registerDate;
     }
 
