@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,6 +28,7 @@ public abstract class PanelBasic extends JPanel{
     protected JFrame popUpWindow;
     protected JPanel searchPanel;
     protected String[] columnNames;
+    protected DefaultTableModel dtm;
     
     public PanelBasic(){
         
@@ -47,10 +49,8 @@ public abstract class PanelBasic extends JPanel{
         
     }
     protected abstract void init();
-    public abstract void setLiteners();
-    public abstract void save();
-    public abstract void edit();
-    public abstract void delete();
+    
+    public abstract void update();
     
     
             

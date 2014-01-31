@@ -24,7 +24,19 @@ import javax.swing.JTextField;
  *
  * @author sjronqui
  */
-public class Panel_cliente extends JPanel{
+public class Panel_cliente extends JPanel implements FrameInternal{
+        JLabel lbl_fecha ;
+        JLabel lbl_nombre;
+        JLabel lbl_apellido;
+        JLabel lbl_direccion ;
+        JLabel lbl_telefono ;
+        JButton btn_cancelar ;
+        JButton btn_guardar ;
+        //Calendar calendario;
+        JTextField txt_nombre;
+        JTextField txt_apellido ;
+        JTextField txt_direccion ;
+        JTextField txt_telefono ;
     
     public Panel_cliente (){
         GridBagLayout layout= new GridBagLayout();
@@ -32,16 +44,16 @@ public class Panel_cliente extends JPanel{
         
         this.setLayout(layout);
         
-        JLabel lbl_fecha = new JLabel("Fecha de registro: ");
-        JLabel lbl_nombre = new JLabel("Nombre:");
-        JLabel lbl_apellido = new JLabel("Apellido:");
-        JLabel lbl_direccion = new JLabel("Dirección:");
-        JLabel lbl_telefono = new JLabel("Teléfono:");
+        //lbl_fecha = new JLabel("Fecha de registro: ");
+        lbl_nombre = new JLabel("Nombre:");
+        lbl_apellido = new JLabel("Apellido:");
+        lbl_direccion = new JLabel("Dirección:");
+        lbl_telefono = new JLabel("Teléfono:");
         
-        Calendar calendario = new GregorianCalendar();
-        JLabel txt_fecha = new JLabel(""+calendario.get(Calendar.DAY_OF_MONTH)+"/"+calendario.get(Calendar.MONTH)+"/"+calendario.get(Calendar.YEAR));
+        //calendario = new GregorianCalendar();
+        //JLabel txt_fecha = new JLabel(""+calendario.get(Calendar.DAY_OF_MONTH)+"/"+calendario.get(Calendar.MONTH)+"/"+calendario.get(Calendar.YEAR));
         
-        JTextField txt_nombre = new JTextField(20);
+        txt_nombre = new JTextField(20);
         txt_nombre.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
@@ -51,7 +63,7 @@ public class Panel_cliente extends JPanel{
                 }
             }
         });
-        JTextField txt_apellido = new JTextField(20);
+        txt_apellido = new JTextField(20);
         txt_apellido.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
@@ -62,7 +74,7 @@ public class Panel_cliente extends JPanel{
             }
         });
         
-        JTextField txt_direccion = new JTextField(25);
+        txt_direccion = new JTextField(25);
         txt_direccion.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]+[a-zA-Z0-9\\.*\\s*]{3.}")){
@@ -72,7 +84,7 @@ public class Panel_cliente extends JPanel{
                 }
             }
         });
-        JTextField txt_telefono = new JTextField(10);
+        txt_telefono = new JTextField(10);
         txt_telefono.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 if(((JTextField)e.getSource()).getText().matches("[0-9]{7}|[0-9]{10}")){
@@ -84,17 +96,17 @@ public class Panel_cliente extends JPanel{
         });
         
         
-        JButton btn_cancelar = new JButton("Cancelar");
-        JButton btn_guardar = new JButton("Guardar");
+        btn_cancelar = new JButton("Cancelar");
+        btn_guardar = new JButton("Guardar");
         JPanel pnl_boton= new JPanel(new FlowLayout());
         
         gbc.fill= GridBagConstraints.HORIZONTAL;
         gbc.anchor=GridBagConstraints.WEST;
         gbc.gridwidth=1;
-        this.add(lbl_fecha,gbc);
+        //this.add(lbl_fecha,gbc);
         
-        gbc.gridwidth=GridBagConstraints.REMAINDER;
-        this.add(txt_fecha,gbc);
+        //gbc.gridwidth=GridBagConstraints.REMAINDER;
+        //this.add(txt_fecha,gbc);
         
         gbc.gridwidth=1;
         this.add(lbl_nombre,gbc);
@@ -127,6 +139,11 @@ public class Panel_cliente extends JPanel{
         pnl_boton.add(btn_guardar);
         this.add(pnl_boton,gbc);
         this.setPreferredSize(new Dimension(400,200));
+    }
+
+    @Override
+    public JButton getSaveButton() {
+        return btn_guardar;
     }
     
 }

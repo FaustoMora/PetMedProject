@@ -8,6 +8,7 @@ package com.petmed.views;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import com.petmed.models.DataConection;
 
 /**
  *
@@ -19,6 +20,7 @@ public class MainWindows extends JFrame {
     
     public MainWindows(){
         super("PetMed v2.0");
+        DataConection.performConnection();
         panel = new JPanel();
         c=new MainTabbedPanel();
         populateClient();

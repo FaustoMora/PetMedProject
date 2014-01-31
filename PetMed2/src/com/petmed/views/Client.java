@@ -6,11 +6,15 @@
 
 package com.petmed.views;
 
+import com.petmed.controllers.BasicController;
+import com.petmed.controllers.ClientController;
+import com.petmed.models.ClientDAO;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -24,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Client extends PanelBasic{
     private Panel_cliente client_panel;
+    private ClientDAO clientDao;
     
     
     
@@ -59,6 +64,7 @@ public class Client extends PanelBasic{
     
     @Override
     protected void init() {
+        clientDao = new ClientDAO();
         newButton.addActionListener(new ActionListener() {
 
             @Override
@@ -75,14 +81,14 @@ public class Client extends PanelBasic{
            }
         });
         
-        columnNames=new String[5];
+        columnNames=new String[4];
         columnNames[0]="Fecha de registro";
         columnNames[1]="Nombre";
-        columnNames[2]="Apellido";
-        columnNames[3]="Direccion";
-        columnNames[4]="Telefono";   
+        
+        columnNames[2]="Direccion";
+        columnNames[3]="Telefono";   
         //Object[][] data1 = {{"joe","joe","21","joe","21"},{"fred","31","fred","31","fred"},{"mary","22","mary","22","mary"}};
-        DefaultTableModel dtm = new DefaultTableModel(null, columnNames){
+        dtm = new DefaultTableModel(null, columnNames){
 
             @Override
             public boolean isCellEditable(int i, int i1) {
@@ -93,29 +99,41 @@ public class Client extends PanelBasic{
         
         data = new JTable(dtm);
         
+        client_panel.btn_guardar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                clientDao.storage(client_panel.txt_nombre.getText(), client_panel.txt_apellido.getText(), client_panel.txt_direccion.getText(), client_panel.txt_telefono.getText());
+                popUpWindow.hide();
+                update();
+                
+            }
+        });
+        
         
     }
 
     @Override
-    public void setLiteners() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void save() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void edit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    
+    public void update() {
+        
+        LinkedList temp = new LinkedList();
+        temp = clientDao.getList();
+        for(int i= 0; i<temp.size();i++){
+            ClientController c= (ClientController)temp.get(i);
+            dtm.insertRow(i,new Object[]{c.getRegisterDate(),c.getName(),c.getAddress(),c.getPhone()});        
+            
+            
+            }
+        
+        
+        
+        
+        }
+        
 }
+
+    
+
+    
+    
+
