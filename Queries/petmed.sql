@@ -1,12 +1,16 @@
 create database petmed;
 use petmed;
 
+create user 'petmed_user'@'localhost' identified by "";
+
+grant all privileges on *.* to 'petmed_user'@'localhost' identified by "" with grant option;
+
 create table if not exists cliente (id integer auto_increment primary key,
 									nombre varchar(45),
 									apellido varchar(45),
 									direccion varchar(45),
 									telefono integer,
-									fecha_registro date);/*en el modelo lógico fecha_registro está como tipo varchar*/
+									fecha_registro date);
 
 create table if not exists mascota(id integer auto_increment primary key,
 									nombre varchar(45),
@@ -206,6 +210,17 @@ begin
 delete from mascota where nombre like nom and cliente_id = id_dueno; 
 end;
 //delimiter ;
+/*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA BUSCAR LAS MASCOTAS DE UN CLIENTE--------------*/
+delimiter //
+create procedure search_mascota(in smth integer)
+begin
+	select * 
+	from mascota 
+	where (mascota.cliente_id =  smth);
+END ;
+// delimiter ;
 /*----------------------------------------------------------------------------*/
 
 /*---------------------PROCEDURE PARA ENCONTRAR MASCOTA--------------*/
