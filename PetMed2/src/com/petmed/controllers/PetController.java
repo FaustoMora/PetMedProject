@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class PetController {
     private int id;
+    private String nombre;
     private Date birthDate;
     private String sexo;
     private String especie;
@@ -21,14 +22,16 @@ public class PetController {
     
     public PetController(){
         id =0;
+        nombre = new String();
         birthDate = new Date();
         sexo = new String();
         especie = new String();
         raza = new String();    
     }
 
-    public PetController(int id, Date birthDate, String sexo, String especie, String raza) {
+    public PetController(int id, String nombre, String especie, String raza, Date birthDate, String sexo) {
         this.id = id;
+        this.nombre=nombre;
         this.birthDate = birthDate;
         this.sexo = sexo;
         this.especie = especie;
@@ -57,6 +60,14 @@ public class PetController {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getEspecie() {

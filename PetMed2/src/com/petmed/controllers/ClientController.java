@@ -15,7 +15,8 @@ import java.util.LinkedList;
  */
 public class ClientController implements BasicController {
     private int id;
-    private String name;    
+    private String name;
+    private String lname;
     private java.sql.Date registerDate;
     private int phone;
     private String address;
@@ -24,24 +25,27 @@ public class ClientController implements BasicController {
     public ClientController() {
         id =0;
         name= new String();
+        lname=new String();
         registerDate =new java.sql.Date(0);
         phone = 0;
         address = new String();
         pets = new LinkedList<PetController>();
     }
 
-    public ClientController(int id, String name, java.sql.Date registerDate, int phone, String address, LinkedList<PetController> pets) {
+    public ClientController(int id, String name, String lname,java.sql.Date registerDate, int phone, String address, LinkedList<PetController> pets) {
         this.id = id;
         this.name = name;
+        this.lname=lname;
         this.registerDate = registerDate;
         this.phone = phone;
         this.address = address;
         this.pets = pets;
     }
     
-    public ClientController(int id, String name, java.sql.Date registerDate, int phone, String address) {
+    public ClientController(int id, String name, String lname, java.sql.Date registerDate, int phone, String address) {
         this.id = id;
         this.name = name;
+        this.lname=lname;
         this.registerDate = registerDate;
         this.phone = phone;
         this.address = address;
@@ -65,7 +69,13 @@ public class ClientController implements BasicController {
         this.name = name;
     }
 
-    
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
    
 
     public Date getRegisterDate() {

@@ -28,7 +28,18 @@ import javax.swing.JTextField;
  * @author sjronqui
  */
 public class Panel_mascota extends JPanel{
-    public Panel_mascota(){
+    
+    JDateChooser txt_nacimiento;
+    JTextField txt_nombre;
+    JTextField txt_raza;
+    JButton btn_cancelar ;
+    JButton btn_guardar ;
+    JButton btn_modificar;
+    ButtonGroup gp_sexo;
+    Choice ch_especie;
+        
+        
+    public Panel_mascota(int m){
         GridBagLayout layout= new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         
@@ -41,8 +52,8 @@ public class Panel_mascota extends JPanel{
         JLabel lbl_sexo = new JLabel("Sexo:");
         
 
-        JDateChooser txt_nacimiento = new JDateChooser();
-        JTextField txt_nombre = new JTextField(20);
+        txt_nacimiento = new JDateChooser();
+        txt_nombre = new JTextField(20);
         txt_nombre.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
@@ -52,7 +63,7 @@ public class Panel_mascota extends JPanel{
                 }
             }
         });
-        JTextField txt_raza = new JTextField(10);
+        txt_raza = new JTextField(10);
         txt_raza.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 if(((JTextField)e.getSource()).getText().matches("[a-zA-Z]{3,}")){
@@ -67,16 +78,18 @@ public class Panel_mascota extends JPanel{
         JRadioButton rb_macho = new JRadioButton("Macho");
         JRadioButton rb_hembra = new JRadioButton("Hembra");
         
-        Choice ch_especie = new Choice();
+        ch_especie = new Choice();
         ch_especie.add("Canina");
         ch_especie.add("Felina");
         
-        ButtonGroup gp_sexo = new ButtonGroup();
+        gp_sexo = new ButtonGroup();
         gp_sexo.add(rb_macho);
         gp_sexo.add(rb_hembra);
         
-        JButton btn_cancelar = new JButton("Cancelar");
-        JButton btn_guardar = new JButton("Guardar");
+        btn_cancelar = new JButton("Cancelar");
+        btn_guardar = new JButton("Guardar");
+        btn_modificar=new JButton("Modificar");
+        
         JPanel pnl_boton= new JPanel(new FlowLayout());
         
         /*gbc.ipadx=10;
@@ -126,7 +139,8 @@ public class Panel_mascota extends JPanel{
         gbc.gridx=1;
         //gbc.gridy=5;
         pnl_boton.add(btn_cancelar);
-        pnl_boton.add(btn_guardar);
+        if(m==1){ pnl_boton.add(btn_modificar);}
+        else {pnl_boton.add(btn_guardar);}
         this.add(pnl_boton,gbc);
         
         this.setPreferredSize(new Dimension(400,300));

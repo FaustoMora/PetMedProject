@@ -19,7 +19,7 @@ public  class DataConection{
 	public static void performConnection() {
 		
 		String user = "root";
-		String pass = "1234";
+		String pass = "root";
 		  try{
 	            Class.forName("com.mysql.jdbc.Driver").newInstance();
 	            con = DriverManager.getConnection(connectionUrl, user,pass);
@@ -79,12 +79,12 @@ public  class DataConection{
         ResultSet resultado;
         try {
             Statement sentencia = con.createStatement();
-            resultado = sentencia.executeQuery(sql);
+            sentencia.execute(sql);
+            resultado = sentencia.getResultSet();
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         }
-
         return resultado;
     }
 	

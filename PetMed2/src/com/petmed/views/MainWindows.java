@@ -26,9 +26,16 @@ public class MainWindows extends JFrame {
         populateClient();
         populatePet();
         populateMeeting();
+        populateDoctor();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
+    }
+    public void populateDoctor(){
+        InnerTabbedPanel i=new InnerTabbedPanel();
+        getContentPane().add(c);
+        i.addTab("Administrar", new Doctor());
+        c.addTab("Médico","doctor", i);  
     }
     
     public void populateClient(){

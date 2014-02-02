@@ -12,13 +12,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.util.Date;
 
 /**
  *
@@ -32,27 +31,29 @@ public class Panel_cliente extends JPanel implements FrameInternal{
         JLabel lbl_telefono ;
         JButton btn_cancelar ;
         JButton btn_guardar ;
-        //Calendar calendario;
+        JButton btn_modificar;
         JTextField txt_nombre;
         JTextField txt_apellido ;
         JTextField txt_direccion ;
         JTextField txt_telefono ;
+        
+        //Revisar:
+        Date fecha;
     
-    public Panel_cliente (){
+    public Panel_cliente (int m){
         GridBagLayout layout= new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         
         this.setLayout(layout);
         
-        //lbl_fecha = new JLabel("Fecha de registro: ");
+        fecha=new Date();
+        
         lbl_nombre = new JLabel("Nombre:");
         lbl_apellido = new JLabel("Apellido:");
         lbl_direccion = new JLabel("Dirección:");
         lbl_telefono = new JLabel("Teléfono:");
         
-        //calendario = new GregorianCalendar();
-        //JLabel txt_fecha = new JLabel(""+calendario.get(Calendar.DAY_OF_MONTH)+"/"+calendario.get(Calendar.MONTH)+"/"+calendario.get(Calendar.YEAR));
-        
+                
         txt_nombre = new JTextField(20);
         txt_nombre.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -98,6 +99,8 @@ public class Panel_cliente extends JPanel implements FrameInternal{
         
         btn_cancelar = new JButton("Cancelar");
         btn_guardar = new JButton("Guardar");
+        btn_modificar=new JButton("Modificar");
+        
         JPanel pnl_boton= new JPanel(new FlowLayout());
         
         gbc.fill= GridBagConstraints.HORIZONTAL;
@@ -136,7 +139,8 @@ public class Panel_cliente extends JPanel implements FrameInternal{
         gbc.gridx=1;
         gbc.gridy=5;
         pnl_boton.add(btn_cancelar);
-        pnl_boton.add(btn_guardar);
+        if(m==1){ pnl_boton.add(btn_modificar);}
+        else {pnl_boton.add(btn_guardar);}
         this.add(pnl_boton,gbc);
         this.setPreferredSize(new Dimension(400,200));
     }

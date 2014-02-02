@@ -7,7 +7,7 @@
 package com.petmed.models;
 
 import com.petmed.controllers.BasicController;
-import com.petmed.controllers.ClientController;
+import com.petmed.controllers.DoctorController;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -18,13 +18,19 @@ import java.util.logging.Logger;
  *
  * @author Ivan
  */
-public class ClientDAO implements BaseDAO {
+public class DoctorDAO implements BaseDAO {
     private String query;
 
     @Override
     public void storage() {
-        query ="call insert_client(0,'Rene','Balda','VM rendon',09992212,2012-02-02)";
-        DataConection.ejecutarprocedure(query);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void storage(String name, String phone){
+        
+        query ="call insert_medico(0,'" + name +"'," + phone +")";
+        
+        DataConection.ejecutarprocedure(query);        
     }
 
     @Override
@@ -37,8 +43,8 @@ public class ClientDAO implements BaseDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void update(int id,String name, String surname,String direccion,String phone) {
-        query ="call update_cliente("+id+",'" + name +"','"+surname+"','" + direccion +"'," + phone +")";
+    public void update(int id,String name, String phone) {
+        query ="call update_medico("+id+",'" + name +"'," + phone +")";
         
         DataConection.ejecutarprocedure(query);  
     }
@@ -49,44 +55,35 @@ public class ClientDAO implements BaseDAO {
      */
     @Override
         public LinkedList getList() {
-        query= "select * from cliente;";
+        query= "select * from medico;";
         ResultSet rs = DataConection.ejecutarProcedureSelect(query);
         LinkedList list= new LinkedList<BasicController>();
         try {
             while(rs.next()){
-                list.add(new ClientController(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getDate(6), rs.getInt(5), rs.getString(4)));                
+                list.add(new DoctorController(rs.getInt(1), rs.getString(2),rs.getInt(3)));                
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DoctorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
         
         public LinkedList getList(String parameter) {
-        query= "select * from cliente where (cliente.nombre like '%"+parameter+"%') or (cliente.apellido like '%"+parameter+"%');";
+        query= "select * from medico where (medico.nombre like '%"+parameter+"%');";
 //        query="{call search_cliente('" + parameter + "')}";
         ResultSet rs = DataConection.ejecutarProcedureSelect(query);
         LinkedList list= new LinkedList<BasicController>();
         try {
             while(rs.next()){
-                list.add(new ClientController(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getDate(6), rs.getInt(5), rs.getString(4)));                
+                list.add(new DoctorController(rs.getInt(1), rs.getString(2),rs.getInt(3)));  
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DoctorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
     
-    public void storage(String name, String surname,String direccion,String phone){
-        
-        query ="call insert_cliente(0,'" + name +"','"+surname+"','" + direccion +"'," + phone +")";
-        
-        DataConection.ejecutarprocedure(query);        
-    }
     
-
-    
-
-    
+      
     
 }
