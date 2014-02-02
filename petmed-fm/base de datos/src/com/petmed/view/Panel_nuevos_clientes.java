@@ -6,6 +6,7 @@
 
 package com.petmed.view;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -36,8 +37,8 @@ public class Panel_nuevos_clientes extends JPanel{
         JLabel lbl_hasta= new JLabel("Hasta:");
         
         
-       // JDateChooser txt_de=new JDateChooser();
-       // JDateChooser txt_hasta=new JDateChooser();
+        JDateChooser txt_de=new JDateChooser();
+        JDateChooser txt_hasta=new JDateChooser();
         
         String columNames[] = {"#" ,"nombre" ,"Fecha de registro" ,"Nombre Mascota" ,"Especie" ,"Motivo de primera visita"};
         
@@ -55,9 +56,9 @@ public class Panel_nuevos_clientes extends JPanel{
         
         JPanel pnl_entrada= new JPanel(new FlowLayout(FlowLayout.CENTER));
         pnl_entrada.add(lbl_de);
-        //pnl_entrada.add(txt_de);
+        pnl_entrada.add(txt_de);
         pnl_entrada.add(lbl_hasta);
-        //pnl_entrada.add(txt_hasta);
+        pnl_entrada.add(txt_hasta);
         
         gbc.fill=GridBagConstraints.HORIZONTAL;
         gbc.weightx=1;

@@ -8,6 +8,7 @@ package com.petmed.view;
 
 
 import com.petmed.DAO.CitaDAO;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Choice;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -47,7 +48,7 @@ public class Panel_cita extends JPanel{
         
         
         
-        //JDateChooser txt_fecha = new JDateChooser();
+        JDateChooser txt_fecha = new JDateChooser();
         txt_nombre = new JTextField(20);        
         txt_hora = new JTextField(6);        
         
@@ -76,7 +77,7 @@ public class Panel_cita extends JPanel{
         this.add(lbl_fecha,gbc);
         
         gbc.gridwidth=GridBagConstraints.REMAINDER;
-        //this.add(txt_fecha,gbc);  
+        this.add(txt_fecha,gbc);  
         
         gbc.gridwidth=1;
         this.add(lbl_hora,gbc);

@@ -25,6 +25,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import com.petmed.DAO.MascotaDAO;
+import com.toedter.calendar.JDateChooser;
 
 /**
  *
@@ -34,6 +35,7 @@ public class Panel_mascota extends JPanel{
     JTextField txt_nombre;
     JTextField txt_raza;
     JTextField txt_dueño;
+    JDateChooser txt_nacimiento;
     Choice ch_especie;
     JButton btn_cancelar;
     JButton btn_guardar;
@@ -57,7 +59,7 @@ public class Panel_mascota extends JPanel{
         JLabel lbl_sexo = new JLabel("Sexo:");
         
 
-      //  JDateChooser txt_nacimiento = new JDateChooser();
+        txt_nacimiento = new JDateChooser();
         txt_nombre = new JTextField(20);
         txt_raza = new JTextField(10);
         txt_dueño = new JTextField(45);
@@ -109,7 +111,8 @@ public class Panel_mascota extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String nom,esp,raza,sexo,dueño;
-				Date fecha_nacimiento=new Date();
+				Date fecha_nacimiento;
+                                fecha_nacimiento= Panel_mascota.this.txt_nacimiento.getDate();
 				
 				nom=Panel_mascota.this.txt_nombre.getText();
 				raza=Panel_mascota.this.txt_raza.getText();
@@ -145,7 +148,7 @@ public class Panel_mascota extends JPanel{
         this.add(lbl_nacimiento,gbc);
         
         gbc.gridwidth=GridBagConstraints.REMAINDER;
-        //this.add(txt_nacimiento,gbc);
+        this.add(txt_nacimiento,gbc);
         
         gbc.gridwidth=1;
         this.add(lbl_sexo,gbc);

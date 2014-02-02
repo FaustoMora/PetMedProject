@@ -1,0 +1,62 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package com.petmed.view;
+
+import com.petmed.DAO.*;
+import com.petmed.models.DataConexion;
+
+import java.sql.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+
+import com.mysql.jdbc.PreparedStatement;
+
+
+/**
+ *
+ * @author rbalda
+ */
+public class Aplication extends JFrame{
+    private static Aplication aplication;
+    private static DataConexion Conexion = DataConexion.getInstance();
+    
+    JLabel text;
+    JTextField campo;
+    JButton b;
+    Panel_superior panel_superior;
+    
+    public Aplication(){
+        super("Pet Med");
+        text = new JLabel("Texto de Prueba");
+        panel_superior= new Panel_superior();
+        Container c;
+        c= getContentPane();
+        c.setLayout(new BorderLayout());
+
+        c.add(panel_superior,BorderLayout.CENTER);
+        c.add(new Panel_opciones(), BorderLayout.WEST);
+
+      
+
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(750,550);
+        this.setLocationRelativeTo(null);
+    }
+    
+    public static void main(String args[]){
+        aplication = new Aplication();
+        new Login();
+        
+    }
+
+}

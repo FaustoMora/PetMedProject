@@ -5,7 +5,7 @@ create table if not exists Cliente (id integer auto_increment primary key,
 									nombre varchar(45),
 									direccion varchar(45),
 									telefono integer,
-									fecha_registro date);/*en el modelo lógico fecha_registro está como tipo varchar*/
+									fecha_registro date);
 
 create table if not exists Mascota(id integer auto_increment primary key,
 									nombre varchar(45),
