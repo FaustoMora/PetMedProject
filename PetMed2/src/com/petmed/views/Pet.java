@@ -84,8 +84,7 @@ public class Pet extends PanelBasic {
                     popUpWindow.getContentPane().removeAll();
                     panel_mascota= new Panel_mascota(0);
                     popUpWindow.add(panel_mascota);
-
-                    System.out.println("Fila presionada: "+data.getSelectedRow()+", Id del Cliente: "+ client_id);
+                    
                     panel_mascota.btn_guardar.addActionListener(new ActionListener() {
 
                         @Override
@@ -100,7 +99,7 @@ public class Pet extends PanelBasic {
                                             client_id);
 
                             popUpWindow.hide();
-                            update2(""+client_id);
+                            update2(client_id);
 
                         }
                     });
@@ -147,7 +146,7 @@ public class Pet extends PanelBasic {
                                             panel_mascota.gp_sexo.getSelection().toString().charAt(0));
 
                             popUpWindow.hide();
-                            update2(""+((ClientController)lst_client.get(data.getSelectedRow())).getId());
+                            update2(((ClientController)lst_client.get(data.getSelectedRow())).getId());
 
                         }
                     });
@@ -214,7 +213,7 @@ public class Pet extends PanelBasic {
             @Override
             public void mousePressed(MouseEvent me) {
                 while(dtm2.getRowCount()>0) dtm2.removeRow(0);
-                update2(""+((ClientController)lst_client.get(data.getSelectedRow())).getId());
+                update2(((ClientController)lst_client.get(data.getSelectedRow())).getId());
             }
 
             @Override
@@ -256,7 +255,7 @@ public class Pet extends PanelBasic {
             }
     }
     
-    public void update2(String parameter){
+    public void update2(int parameter){
         lst_pet = petDao.getList(parameter);
         while(dtm2.getRowCount()>0) dtm2.removeRow(0);
         for(int i= 0; i<lst_pet.size();i++){

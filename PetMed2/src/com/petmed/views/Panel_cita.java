@@ -9,26 +9,17 @@ package com.petmed.views;
 import com.toedter.calendar.JDateChooser;
 import java.awt.BorderLayout;
 import java.awt.Choice;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Date;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,13 +27,16 @@ import javax.swing.table.DefaultTableModel;
  * @author sjronqui
  */
 public class Panel_cita extends JPanel{
+    JButton btn_guardar;
+    JButton btn_cancelar;
+    JButton btn_modificar;
     JTextField txt_nombre;
     DefaultTableModel dtm;
     JTable data;
     Choice listaHoras;
     
     
-    public Panel_cita(){
+    public Panel_cita(int m){
         GridBagLayout layout= new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         
@@ -56,7 +50,7 @@ public class Panel_cita extends JPanel{
         JDateChooser txt_fecha = new JDateChooser();
         txt_nombre = new JTextField(20);
         txt_nombre.setEditable(false);
-        
+               
         
         this.listaHoras=new Choice();
         this.crearChoice();
@@ -93,8 +87,9 @@ public class Panel_cita extends JPanel{
         panel1.setPreferredSize(new Dimension(200,80));
         //panel1.setBorder(new TitledBorder("Medicos"));
         
-        JButton btn_cancelar = new JButton("Cancelar");
-        JButton btn_guardar = new JButton("Guardar");
+        btn_cancelar = new JButton("Cancelar");
+        btn_guardar = new JButton("Guardar");
+        btn_modificar=new JButton("Modificar");
         JPanel pnl_boton= new JPanel(new FlowLayout());
         
         
@@ -151,10 +146,13 @@ public class Panel_cita extends JPanel{
         gbc.gridwidth=GridBagConstraints.REMAINDER;
         this.add(listaHoras,gbc);       
         
-        gbc.gridx=1;
+        gbc.gridx=0;
         gbc.gridy=5;
+        gbc.anchor=GridBagConstraints.CENTER;
+        gbc.gridwidth=GridBagConstraints.REMAINDER;
         pnl_boton.add(btn_cancelar);
-        pnl_boton.add(btn_guardar);
+        if(m==1){   pnl_boton.add(btn_modificar);   }
+        else {  pnl_boton.add(btn_guardar); }
         this.add(pnl_boton,gbc);
         
         this.setPreferredSize(new Dimension(650,300));

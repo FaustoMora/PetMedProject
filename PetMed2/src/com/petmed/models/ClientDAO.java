@@ -49,7 +49,7 @@ public class ClientDAO implements BaseDAO {
      */
     @Override
         public LinkedList getList() {
-        query= "select * from cliente;";
+        query="{call search_cliente('%')}";
         ResultSet rs = DataConection.ejecutarProcedureSelect(query);
         LinkedList list= new LinkedList<BasicController>();
         try {
@@ -63,8 +63,7 @@ public class ClientDAO implements BaseDAO {
     }
         
         public LinkedList getList(String parameter) {
-        query= "select * from cliente where (cliente.nombre like '%"+parameter+"%') or (cliente.apellido like '%"+parameter+"%');";
-//        query="{call search_cliente('" + parameter + "')}";
+        query="{call search_cliente('%" + parameter + "%')}";
         ResultSet rs = DataConection.ejecutarProcedureSelect(query);
         LinkedList list= new LinkedList<BasicController>();
         try {

@@ -6,11 +6,13 @@
 
 package com.petmed.views;
 
+import com.petmed.controllers.ClientController;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,13 +27,13 @@ public class Meeting extends PanelBasic{
     private Panel_cita panelCita;
     private JTable data2;
     private String columNames2[];
+    private LinkedList lst_client = new LinkedList();
+    private LinkedList lst_meeting = new LinkedList();
     
     public Meeting(){
         super();
         setLayout(new BorderLayout());
-        panelCita= new Panel_cita();
-        popUpWindow.add(panelCita);
-        popUpWindow.pack();
+        
         init();
         JPanel panelButtons= new JPanel(new GridLayout(1,3));
         
@@ -65,10 +67,20 @@ public class Meeting extends PanelBasic{
     protected void init() {
         
         newButton.addActionListener(new ActionListener() {
-
+            private int client_id;
             @Override
             public void actionPerformed(ActionEvent ae) {
-                popUpWindow.setVisible(true);
+                if(data.getSelectedRow()>=0){
+                    client_id=((ClientController)lst_client.get(data.getSelectedRow())).getId();
+                    
+                    panelCita= new Panel_cita(0);
+                    popUpWindow.add(panelCita);
+                    popUpWindow.pack();
+                    
+                    
+
+                    popUpWindow.setVisible(true);
+                }
             }
         });
         
@@ -76,7 +88,16 @@ public class Meeting extends PanelBasic{
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                //data.getSele
+                if(data.getSelectedRow()>=0){
+//                    meeting_id=((ClientController)lst_client.get(data.getSelectedRow())).getId();
+                    panelCita= new Panel_cita(1);
+                    popUpWindow.add(panelCita);
+                    popUpWindow.pack();
+
+
+
+                    popUpWindow.setVisible(true);
+                }
            }
         });
         
