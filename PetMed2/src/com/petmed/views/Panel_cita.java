@@ -31,6 +31,7 @@ public class Panel_cita extends JPanel{
     JButton btn_cancelar;
     JButton btn_modificar;
     JTextField txt_nombre;
+    JDateChooser txt_fecha;
     DefaultTableModel dtm;
     JTable data;
     Choice listaHoras;
@@ -47,7 +48,7 @@ public class Panel_cita extends JPanel{
         JLabel lbl_medico = new JLabel("Médico:");
         
         
-        JDateChooser txt_fecha = new JDateChooser();
+        txt_fecha = new JDateChooser();
         txt_nombre = new JTextField(20);
         txt_nombre.setEditable(false);
                
@@ -111,18 +112,18 @@ public class Panel_cita extends JPanel{
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth=1;
-        this.add(lbl_medico,gbc);
+//        this.add(lbl_medico,gbc);
         
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth=GridBagConstraints.REMAINDER;
         //this.add(txt_medico,gbc);
-        this.add(searchPanel);
+//        this.add(searchPanel);
         
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth=GridBagConstraints.REMAINDER;
-        this.add(panel1,gbc);
+//        this.add(panel1,gbc);
         
         gbc.gridx = 0;
         gbc.gridy = 3;
