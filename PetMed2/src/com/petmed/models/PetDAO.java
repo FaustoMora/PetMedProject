@@ -47,7 +47,8 @@ private String query;
     
     @Override
         public LinkedList getList() {
-        query= "select * from mascota;";
+        /*query= "select * from mascota;";
+        query="{call search_mascota(null)}";
         ResultSet rs = DataConection.ejecutarProcedureSelect(query);
         LinkedList list= new LinkedList<BasicController>();
         try {
@@ -56,13 +57,12 @@ private String query;
             }
         } catch (SQLException ex) {
             Logger.getLogger(PetDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
+        }*/
+        return null;
     }
         
-        public LinkedList getList(String parameter) {
-        query= "select * from mascota where mascota.cliente_id ="+parameter+";";
-//        query="{call search_cliente('" + parameter + "')}";
+        public LinkedList getList(int parameter) {
+        query="{call search_mascota(" + parameter + ")}";
         
         ResultSet rs = DataConection.ejecutarProcedureSelect(query);
         LinkedList list= new LinkedList<BasicController>();

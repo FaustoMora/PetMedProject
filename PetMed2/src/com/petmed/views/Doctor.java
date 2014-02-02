@@ -176,7 +176,6 @@ public class Doctor extends PanelBasic{
             DoctorController c= (DoctorController)temp.get(i);
             dtm.insertRow(i,new Object[]{c.getName(), c.getPhone()});        
             
-            
         }
     }
 }
