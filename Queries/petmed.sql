@@ -136,11 +136,10 @@ delimiter ;
 												
 /*---------------------PROCEDURE PARA INSERCION EN TABLA CLIENTE--------------*/
 delimiter //
-create procedure insert_cliente (in id integer ,in nombre varchar(45), in apellido varchar(45),in direccion varchar(45),in telefono integer)
+create procedure insert_cliente(in nombre varchar(45), in apellido varchar(45),in direccion varchar(45),in telefono integer)
 begin
-INSERT INTO cliente VALUES(id,nombre,apellido,direccion,telefono,current_date); 
-
-END ; 
+INSERT INTO cliente (nombre,apellido,direccion,telefono,fecha_registro)VALUES(nombre,apellido,direccion,telefono,curdate()); 
+END;
 //
 delimiter ;
 /*----------------------------------------------------------------------------*/
