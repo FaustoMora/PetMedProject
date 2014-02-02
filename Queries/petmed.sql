@@ -453,9 +453,3 @@ begin
 select id from consulta where fecha_consulta=fecha and medico_id =med_id and mascota_id=masc_id;
 END;
 // delimiter ;
-
-select * 
-from mascota 
-where mascota.cliente_id = 3;
-
-select * from cliente where id=3;
