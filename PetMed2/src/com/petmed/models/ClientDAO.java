@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -49,7 +50,7 @@ public class ClientDAO implements BaseDAO {
      */
     @Override
         public LinkedList getList() {
-        query="{call search_cliente('%')}";
+        query= "select * from cliente;";
         ResultSet rs = DataConection.ejecutarProcedureSelect(query);
         LinkedList list= new LinkedList<BasicController>();
         try {
@@ -63,7 +64,8 @@ public class ClientDAO implements BaseDAO {
     }
         
         public LinkedList getList(String parameter) {
-        query="{call search_cliente('%" + parameter + "%')}";
+        query= "select * from cliente where (cliente.nombre like '%"+parameter+"%') or (cliente.apellido like '%"+parameter+"%');";
+//        query="{call search_cliente('" + parameter + "')}";
         ResultSet rs = DataConection.ejecutarProcedureSelect(query);
         LinkedList list= new LinkedList<BasicController>();
         try {
@@ -78,7 +80,7 @@ public class ClientDAO implements BaseDAO {
     
     public void storage(String name, String surname,String direccion,String phone){
         
-        query ="call insert_cliente(0,'" + name +"','"+surname+"','" + direccion +"'," + phone +")";
+        query ="call insert_cliente('" + name +"','"+surname+"','" + direccion +"'," + phone +")";
         
         DataConection.ejecutarprocedure(query);        
     }

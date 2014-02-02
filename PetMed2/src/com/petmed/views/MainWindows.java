@@ -9,6 +9,8 @@ package com.petmed.views;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.petmed.models.DataConection;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -17,6 +19,7 @@ import com.petmed.models.DataConection;
 public class MainWindows extends JFrame {
     JPanel panel;
     MainTabbedPanel c;
+    Client cli;
     
     public MainWindows(){
         super("PetMed v2.0");
@@ -30,6 +33,15 @@ public class MainWindows extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowOpened(WindowEvent we) {
+                cli.update(); //To change body of generated methods, choose Tools | Templates.
+            }
+            
+});
+    
     }
     public void populateDoctor(){
         InnerTabbedPanel i=new InnerTabbedPanel();
@@ -42,7 +54,8 @@ public class MainWindows extends JFrame {
         
         InnerTabbedPanel i=new InnerTabbedPanel();
         getContentPane().add(c);
-        i.addTab("Administrar", new Client());
+        cli=new Client();
+        i.addTab("Administrar",cli );
         c.addTab("Cliente","cliente", i);    
     }
     

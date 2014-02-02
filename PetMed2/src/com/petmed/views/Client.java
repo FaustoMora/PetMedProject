@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -96,7 +97,9 @@ public class Client extends PanelBasic{
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(data.getSelectedRow()>=0){//protección temporal para evitar que edite sin haber seleccionado antes.
+                if(data.getSelectedRow()<0)
+                    JOptionPane.showMessageDialog(null, "No ha seleccionado un cliente");
+                else{//protección temporal para evitar que edite sin haber seleccionado antes.
                     popUpWindow.getContentPane().removeAll();
                     
                     client_tmp=(ClientController)temp.get(data.getSelectedRow());
@@ -166,6 +169,7 @@ public class Client extends PanelBasic{
 
     @Override
     public void update() {
+        dtm.setRowCount(0);
    
         temp = clientDao.getList();
         while(dtm.getRowCount()>0) dtm.removeRow(0);
@@ -178,11 +182,12 @@ public class Client extends PanelBasic{
         }
         
     public void update(String parameter){
+        dtm.setRowCount(0);
         temp = clientDao.getList(parameter);
         while(dtm.getRowCount()>0) dtm.removeRow(0);
         for(int i= 0; i<temp.size();i++){
             ClientController c= (ClientController)temp.get(i);
-            dtm.insertRow(i,new Object[]{c.getRegisterDate(),c.getName(),c.getAddress(),c.getPhone()});        
+            dtm.insertRow(i,new Object[]{c.getRegisterDate(),c.getName(), c.getLname(),c.getAddress(),c.getPhone()});      
             
             
         }
