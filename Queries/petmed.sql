@@ -46,8 +46,8 @@ create table if not exists tratamiento(id integer auto_increment primary key,
 create table if not exists consulta(id integer auto_increment primary key,
 									fecha_consulta date not null,
 									hora time not null,
-									motivo varchar(45),
-                                    diagnositoc varchar(100),
+/*									motivo varchar(45),							bye bye*/
+                                    diagnostico varchar(100),	
 									medico_id integer not null,
 									tratamiento_id integer null,
 									mascota_id integer not null,
@@ -280,9 +280,9 @@ end;
 
 /*---------------------PROCEDURE PARA MODIFICAR CITA--------------*/
 delimiter //
-create procedure update_cita(in fecha_reg date, in hora_reg time, in cliente integer)
+create procedure update_cita(in fecha_reg date, in hora_reg time, in id integer)
 begin
-update cita set fecha_cita=fecha_reg, hora = hora_reg where cliente_id=cliente;
+update cita set fecha_cita=fecha_reg, hora = hora_reg where cita.id=id;
 end;
 // delimiter ;
 /*----------------------------------------------------------------------------*/
@@ -298,9 +298,9 @@ end;
 
 /*---------------------PROCEDURE PARA ENCONTRAR CITA--------------*/
 delimiter //
-create procedure find_cita(in cliente integer)
+create procedure search_cita(in cliente integer)
 begin
-select id from cita where cliente_id = cliente;
+select * from cita where cliente_id = cliente;
 end;
 // delimiter ;
 /*----------------------------------------------------------------------------*/
