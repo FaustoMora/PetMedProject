@@ -79,7 +79,7 @@ public class ClientDAO implements BaseDAO {
     
     public void storage(String name, String surname,String direccion,String phone){
         
-        query ="call insert_cliente(0,'" + name +"','"+surname+"','" + direccion +"'," + phone +")";
+        query ="call insert_cliente('" + name +"','"+surname+"','" + direccion +"'," + phone +")";
         
         DataConection.ejecutarprocedure(query);        
     }
