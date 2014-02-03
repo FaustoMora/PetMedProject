@@ -37,6 +37,8 @@ public class Panel_mascota extends JPanel{
     JButton btn_modificar;
     ButtonGroup gp_sexo;
     Choice ch_especie;
+    JRadioButton rb_macho ;
+    JRadioButton rb_hembra ;
         
         
     public Panel_mascota(int m){
@@ -75,8 +77,10 @@ public class Panel_mascota extends JPanel{
         });
         
 
-        JRadioButton rb_macho = new JRadioButton("Macho");
-        JRadioButton rb_hembra = new JRadioButton("Hembra");
+        rb_macho = new JRadioButton("Macho");
+        rb_macho.setActionCommand("M");
+        rb_hembra = new JRadioButton("Hembra");
+        rb_hembra.setActionCommand("H");
         
         ch_especie = new Choice();
         ch_especie.add("Canina");

@@ -90,12 +90,13 @@ public class Pet extends PanelBasic {
                         @Override
                         public void actionPerformed(ActionEvent ae) {
 
-
+                            panel_mascota.rb_macho.setSelected(true);
                             petDao.storage( panel_mascota.txt_nombre.getText(),
                                             panel_mascota.ch_especie.getSelectedItem(),
                                             panel_mascota.txt_raza.getText(),
                                             panel_mascota.txt_nacimiento.getDate(),
-                                            panel_mascota.gp_sexo.getSelection().toString().charAt(0),
+                                            panel_mascota.gp_sexo.getSelection().getActionCommand().charAt(0),
+                                            //panel_mascota.gp_sexo.getSelection().toString().charAt(0),
                                             client_id);
 
                             popUpWindow.hide();
@@ -126,24 +127,30 @@ public class Pet extends PanelBasic {
                     panel_mascota.txt_nacimiento.setDate(pet_tmp.getBirthDate());
                     panel_mascota.txt_raza.setText(pet_tmp.getRaza());
                     panel_mascota.ch_especie.select(pet_tmp.getEspecie());
+                    if(pet_tmp.getSexo().equals("H")){
+                        panel_mascota.rb_hembra.setSelected(true);}
+                    else{
+                        panel_mascota.rb_macho.setSelected(true);}
+                    
                     
                     
                     
                     popUpWindow.add(panel_mascota);
 
                     panel_mascota.btn_modificar.addActionListener(new ActionListener() {
+                        private PetController pet_tmp;
 
                         @Override
-                        public void actionPerformed(ActionEvent ae) {
-                           
-                            
+                        public void actionPerformed(ActionEvent ae) {               
+                                                     
 
-
+                            System.out.println(panel_mascota.gp_sexo.getSelection().getActionCommand().charAt(0));
                             petDao.update(pet_tmp.getId(), panel_mascota.txt_nombre.getText(),
                                             panel_mascota.ch_especie.getSelectedItem(),
                                             panel_mascota.txt_raza.getText(),
                                             panel_mascota.txt_nacimiento.getDate(),
-                                            panel_mascota.gp_sexo.getSelection().toString().charAt(0));
+                                            panel_mascota.gp_sexo.getSelection().getActionCommand().charAt(0));
+                            
 
                             popUpWindow.hide();
                             update2(((ClientController)lst_client.get(data.getSelectedRow())).getId());
