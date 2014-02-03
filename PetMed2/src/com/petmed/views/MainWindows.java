@@ -65,6 +65,7 @@ public class MainWindows extends JFrame {
         InnerTabbedPanel i=new InnerTabbedPanel();
         getContentPane().add(c);
         i.addTab("Administrar", new Pet());
+        i.addTab("Reportes", new Panel_historial_mascota());
         c.addTab("Mascota","mascota", i);    
     }
     
