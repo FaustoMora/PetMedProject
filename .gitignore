@@ -1,10 +1,8 @@
 /PetMed/nbproject/private/
 /PetMed/build/
-<<<<<<< HEAD
 /PetMed2/nbproject/private/
 /PetMed2/build/
-=======
 /PetMed/dist/
->>>>>>> 6ee95235df2938d5367048287f5b1c7c57fe3819
 /petmed-fm/base de datos/nbproject/private/
 /petmed-fm/base de datos/build/
+/PetMed2/src/com/petmed/models/DataConection.java
