@@ -138,13 +138,12 @@ public class Pet extends PanelBasic {
                     popUpWindow.add(panel_mascota);
 
                     panel_mascota.btn_modificar.addActionListener(new ActionListener() {
-                        //private PetController pet_tmp;
+
 
                         @Override
                         public void actionPerformed(ActionEvent ae) {               
                                                      
 
-                            System.out.println(panel_mascota.gp_sexo.getSelection().getActionCommand().charAt(0));
                             petDao.update(pet_tmp.getId(), panel_mascota.txt_nombre.getText(),
                                             panel_mascota.ch_especie.getSelectedItem(),
                                             panel_mascota.txt_raza.getText(),
