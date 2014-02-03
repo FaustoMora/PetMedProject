@@ -138,7 +138,7 @@ public class Pet extends PanelBasic {
                     popUpWindow.add(panel_mascota);
 
                     panel_mascota.btn_modificar.addActionListener(new ActionListener() {
-                        private PetController pet_tmp;
+                        //private PetController pet_tmp;
 
                         @Override
                         public void actionPerformed(ActionEvent ae) {               
