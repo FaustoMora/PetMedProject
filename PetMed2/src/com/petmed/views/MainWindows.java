@@ -47,7 +47,7 @@ public class MainWindows extends JFrame {
         InnerTabbedPanel i=new InnerTabbedPanel();
         getContentPane().add(c);
         i.addTab("Administrar", new Doctor());
-        i.addTab("Reportes", new Panel_medico_consulta());
+        i.addTab("Consultas por médico", new Panel_medico_consulta());
         c.addTab("Médico","doctor", i);  
     }
     
@@ -66,7 +66,7 @@ public class MainWindows extends JFrame {
         InnerTabbedPanel i=new InnerTabbedPanel();
         getContentPane().add(c);
         i.addTab("Administrar", new Pet());
-        i.addTab("Reportes", new Panel_historial_mascota());
+        i.addTab("Historial de mascotas", new Panel_historial_mascota());
         c.addTab("Mascota","mascota", i);    
     }
     
