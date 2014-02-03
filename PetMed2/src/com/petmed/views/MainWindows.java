@@ -30,6 +30,7 @@ public class MainWindows extends JFrame {
         populatePet();
         populateMeeting();
         populateDoctor();
+        populateConsulta();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
@@ -76,6 +77,14 @@ public class MainWindows extends JFrame {
         getContentPane().add(c);
         i.addTab("Administrar", new Meeting());
         c.addTab("Citas","cita", i);    
+    }
+    
+    public void populateConsulta(){
+        
+        InnerTabbedPanel i=new InnerTabbedPanel();
+        getContentPane().add(c);
+        i.addTab("Administrar", new Consulta());
+        c.addTab("Consultas","consulta", i);    
     }
     
     public static void main(String args[]){

@@ -245,7 +245,7 @@ public class Pet extends PanelBasic {
         while(dtm.getRowCount()>0) dtm.removeRow(0);
         for(int i= 0; i<lst_client.size();i++){
             ClientController c= (ClientController)lst_client.get(i);
-            dtm.insertRow(i,new Object[]{c.getRegisterDate(),c.getName(),c.getAddress(),c.getPhone()});        
+            dtm.insertRow(i,new Object[]{c.getName(),c.getLname(),c.getPhone()});        
 
             }
     }
@@ -255,7 +255,7 @@ public class Pet extends PanelBasic {
         while(dtm.getRowCount()>0) dtm.removeRow(0);
         for(int i= 0; i<lst_client.size();i++){
             ClientController c= (ClientController)lst_client.get(i);
-            dtm.insertRow(i,new Object[]{c.getRegisterDate(),c.getName(),c.getAddress(),c.getPhone()});        
+            dtm.insertRow(i,new Object[]{c.getName(),c.getLname(),c.getPhone()});        
 
             }
     }

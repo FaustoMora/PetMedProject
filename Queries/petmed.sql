@@ -23,8 +23,8 @@ create table if not exists mascota(id integer auto_increment primary key,
 
 
 create table if not exists fisiologia(id integer auto_increment primary key,
-										temperatura integer not null,
-										peso integer not null,
+										temperatura float not null,
+										peso float not null,
 										fecha_ingreso date not null,
 										mascota_id integer not null,
 										foreign key(mascota_id) references mascota(id));
@@ -42,12 +42,13 @@ create table if not exists medico(id integer auto_increment primary key,
 
 create table if not exists tratamiento(id integer auto_increment primary key,
 										descripcion varchar(90)not null);
+insert into tratamiento values(0,"lo que sea");
 
 create table if not exists consulta(id integer auto_increment primary key,
 									fecha_consulta date not null,
 									hora time not null,
 									motivo varchar(45),							
-                                    diagnostico varchar(100),	
+                                    diagnostico varchar(100), 	
 									medico_id integer not null,
 									tratamiento_id integer null,
 									mascota_id integer not null,
@@ -386,7 +387,7 @@ END ;
 /*---------------------PROCEDURE PARA INGRESAR FISIOLOGIA--------------*/
 
 delimiter //
-create procedure insert_fisiologia(in id integer, in temperatura integer, in peso integer, in fecha_ing date, in mascota_id integer)
+create procedure insert_fisiologia(in id integer, in temperatura float, in peso float, in fecha_ing date, in mascota_id integer)
 begin
 insert into fisiologia value(id,temperatura,peso,fecha_ing,mascota_id);
 END ;
@@ -453,6 +454,16 @@ insert into consulta values(id,fecha,hora,motivo,diagnos,medico_id,trat_id,masco
 END;
 // delimiter ;
 /*----------------------------------------------------------------------------*/
+
+/*---------------------PROCEDURE PARA MODIFICAR CONSULTA--------------*/
+delimiter //
+create procedure update_consulta(in id integer, in diagnos varchar(100), in trat_id integer)
+begin 
+update consulta set consulta.diagnostico= diagnos , Consulta.tratamiento_id= trat_id where consulta.id = id;
+end;
+//delimiter ;
+/*----------------------------------------------------------------------------*/
+
 /*---------------------PROCEDURE PARA ELIMINAR CONSULTA--------------*/
 delimiter //
 create procedure delete_consulta(in fecha date, in med_id integer, in masc_id integer)
@@ -461,6 +472,16 @@ delete from  consulta where fecha_consulta=fecha and medico_id =med_id and masco
 END;
 // delimiter ;
 /*----------------------------------------------------------------------------*/
+
+/*-----------------PROCEDURE PARA ENCONTRAR LAS CONSULTAS DE UNA MASCOTA--------------*/
+delimiter //
+create procedure search_consulta(in masc_id integer)
+begin
+select * from consulta where mascota_id=masc_id;
+END;
+// delimiter ;
+
+
 /*---------------------PROCEDURE PARA ENCONTRAR CONSULTA--------------*/
 delimiter //
 create procedure find_consulta(in fecha date, in med_id integer, in masc_id integer)
@@ -468,6 +489,11 @@ begin
 select id from consulta where fecha_consulta=fecha and medico_id =med_id and mascota_id=masc_id;
 END;
 // delimiter ;
+
+
+
+
+
 
 delimiter //
 create procedure count_medico_consulta()
@@ -479,12 +505,10 @@ end;
 
 
 
-
-
 delimiter //
 create procedure select_mascota_historial(in ident integer)
 begin
-select f.temperatura, f.peso, c.diagnositoc, c.fecha_consulta, t.descripcion, d.nombre as 'Propietario' 
+select f.temperatura, f.peso, c.diagnostico, c.fecha_consulta, t.descripcion, d.nombre as 'Propietario' 
 from cliente d, mascota m, fisiologia f, consulta c, tratamiento t 
 where m.id=ident and d.id=m.cliente_id and m.id=f.mascota_id and m.id=c.mascota_id and c.tratamiento_id=t.id 
 order by(d.nombre);
