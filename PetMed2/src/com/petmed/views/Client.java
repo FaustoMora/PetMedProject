@@ -30,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
 public class Client extends PanelBasic{
     private Panel_cliente client_panel;
     private ClientDAO clientDao;
-    private LinkedList temp = new LinkedList();
+    public static LinkedList temp = new LinkedList();
     
     
     
@@ -141,6 +141,16 @@ public class Client extends PanelBasic{
                 else{update(search.getText());};
             }
         });//
+        
+        deleteButton.addActionListener(new ActionListener() {
+            private ClientController client_tmp;  
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                 client_tmp=(ClientController)temp.get(data.getSelectedRow());
+                
+            }
+        });
         
         
         

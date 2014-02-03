@@ -56,6 +56,7 @@ public class MainWindows extends JFrame {
         getContentPane().add(c);
         cli=new Client();
         i.addTab("Administrar",cli );
+        i.addTab("Clientes por Fecha", new Panel_nuevos_clientes() );
         c.addTab("Cliente","cliente", i);    
     }
     

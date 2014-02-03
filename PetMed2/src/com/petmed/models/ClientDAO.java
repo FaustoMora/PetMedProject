@@ -11,6 +11,7 @@ import com.petmed.controllers.BasicController;
 import com.petmed.controllers.ClientController;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,6 +85,37 @@ public class ClientDAO implements BaseDAO {
         
         DataConection.ejecutarprocedure(query);        
     }
+    
+    public LinkedList getList(Date inic,Date fin){
+        java.sql.Date inicDate,finDate;
+        if(inic.before(fin)){
+            inicDate = new java.sql.Date(inic.getTime());
+            finDate = new java.sql.Date(fin.getTime());}
+        else{
+            finDate = new java.sql.Date(inic.getTime());
+            inicDate = new java.sql.Date(fin.getTime());}
+        query= "select * from cliente where fecha_registro between date('"+inicDate.toString()+"') and date('"+finDate.toString()+"');";
+        ResultSet rs = DataConection.ejecutarProcedureSelect(query);
+        LinkedList list= new LinkedList<BasicController>();
+        try {
+            while(rs.next()){
+                list.add(new ClientController(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getDate(6), rs.getInt(5), rs.getString(4)));                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+        }
+
+    @Override
+    public void delete() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+        
+        
+    
+    
     
 
     
