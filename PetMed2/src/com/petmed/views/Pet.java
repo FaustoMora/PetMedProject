@@ -96,7 +96,6 @@ public class Pet extends PanelBasic {
                                             panel_mascota.txt_raza.getText(),
                                             panel_mascota.txt_nacimiento.getDate(),
                                             panel_mascota.gp_sexo.getSelection().getActionCommand().charAt(0),
-                                            //panel_mascota.gp_sexo.getSelection().toString().charAt(0),
                                             client_id);
 
                             popUpWindow.hide();

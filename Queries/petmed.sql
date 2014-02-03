@@ -46,7 +46,7 @@ create table if not exists tratamiento(id integer auto_increment primary key,
 create table if not exists consulta(id integer auto_increment primary key,
 									fecha_consulta date not null,
 									hora time not null,
-/*									motivo varchar(45),							bye bye*/
+									motivo varchar(45),							
                                     diagnostico varchar(100),	
 									medico_id integer not null,
 									tratamiento_id integer null,
@@ -476,3 +476,34 @@ select m.nombre, count(c.id) as 'Numero de Consulta' from consulta c, medico m w
 group by (m.nombre);
 end;
 //delimiter ;
+
+
+
+
+
+delimiter //
+create procedure select_mascota_historial(in ident integer)
+begin
+select f.temperatura, f.peso, c.diagnositoc, c.fecha_consulta, t.descripcion, d.nombre as 'Propietario' 
+from cliente d, mascota m, fisiologia f, consulta c, tratamiento t 
+where m.id=ident and d.id=m.cliente_id and m.id=f.mascota_id and m.id=c.mascota_id and c.tratamiento_id=t.id 
+order by(d.nombre);
+end;
+// delimiter ;
+
+
+delimiter //
+create procedure select_cliente_mascota()
+begin
+select c.nombre, c.direccion, c.telefono, c.fecha_registro, m.nombre, m.especie, m.raza, m.fecha_nacimiento, m.sexo from cliente c, mascota m where c.id=m.cliente_id
+order by(c.nombre);
+end;
+// delimiter ;
+
+delimiter //
+create procedure select_mascota_by_cliente(in nom varchar(45))
+begin
+select m.nombre, m.especie, m.raza, m.fecha_nacimiento, m.sexo from mascota m where m.cliente_id=(select id from cliente where nombre like nom) order by(m.nombre); 
+end;
+//delimiter ;
+

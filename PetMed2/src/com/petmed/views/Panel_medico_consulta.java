@@ -83,9 +83,7 @@ public class Panel_medico_consulta extends JPanel{
     public void cargarTabla(){
         String seleccion = "{call count_medico_consulta()}";
         ResultSet rs = DataConection.ejecutarProcedureSelect(seleccion);
-        
-        
-        
+  
         while(dtm2.getRowCount()>0) dtm2.removeRow(0);
         try {
             int i=0;
