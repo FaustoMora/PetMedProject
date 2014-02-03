@@ -1,12 +1,16 @@
 create database petmed;
 use petmed;
 
+create user 'petmed_user'@'localhost' identified by "";
+
+grant all privileges on *.* to 'petmed_user'@'localhost' identified by "" with grant option;
+
 create table if not exists cliente (id integer auto_increment primary key,
 									nombre varchar(45),
 									apellido varchar(45),
 									direccion varchar(45),
 									telefono integer,
-									fecha_registro date);/*en el modelo lógico fecha_registro está como tipo varchar*/
+									fecha_registro date);
 
 create table if not exists mascota(id integer auto_increment primary key,
 									nombre varchar(45),
@@ -42,8 +46,8 @@ create table if not exists tratamiento(id integer auto_increment primary key,
 create table if not exists consulta(id integer auto_increment primary key,
 									fecha_consulta date not null,
 									hora time not null,
-									motivo varchar(45),
-                                    diagnositoc varchar(100),
+/*									motivo varchar(45),							bye bye*/
+                                    diagnostico varchar(100),	
 									medico_id integer not null,
 									tratamiento_id integer null,
 									mascota_id integer not null,
@@ -208,6 +212,17 @@ end;
 //delimiter ;
 /*----------------------------------------------------------------------------*/
 
+/*---------------------PROCEDURE PARA BUSCAR LAS MASCOTAS DE UN CLIENTE--------------*/
+delimiter //
+create procedure search_mascota(in smth integer)
+begin
+	select * 
+	from mascota 
+	where (mascota.cliente_id =  smth);
+END ;
+// delimiter ;
+/*----------------------------------------------------------------------------*/
+
 /*---------------------PROCEDURE PARA ENCONTRAR MASCOTA--------------*/
 delimiter //
 create procedure find_mascota(in nom varchar(45),in id_dueno integer)
@@ -265,9 +280,9 @@ end;
 
 /*---------------------PROCEDURE PARA MODIFICAR CITA--------------*/
 delimiter //
-create procedure update_cita(in fecha_reg date, in hora_reg time, in cliente integer)
+create procedure update_cita(in fecha_reg date, in hora_reg time, in id integer)
 begin
-update cita set fecha_cita=fecha_reg, hora = hora_reg where cliente_id=cliente;
+update cita set fecha_cita=fecha_reg, hora = hora_reg where cita.id=id;
 end;
 // delimiter ;
 /*----------------------------------------------------------------------------*/
@@ -283,9 +298,9 @@ end;
 
 /*---------------------PROCEDURE PARA ENCONTRAR CITA--------------*/
 delimiter //
-create procedure find_cita(in cliente integer)
+create procedure search_cita(in cliente integer)
 begin
-select id from cita where cliente_id = cliente;
+select * from cita where cliente_id = cliente;
 end;
 // delimiter ;
 /*----------------------------------------------------------------------------*/
@@ -453,3 +468,11 @@ begin
 select id from consulta where fecha_consulta=fecha and medico_id =med_id and mascota_id=masc_id;
 END;
 // delimiter ;
+
+delimiter //
+create procedure count_medico_consulta()
+begin
+select m.nombre, count(c.id) as 'Numero de Consulta' from consulta c, medico m where c.medico_id=m.id
+group by (m.nombre);
+end;
+//delimiter ;

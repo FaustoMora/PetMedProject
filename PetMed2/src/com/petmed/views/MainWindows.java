@@ -47,6 +47,7 @@ public class MainWindows extends JFrame {
         InnerTabbedPanel i=new InnerTabbedPanel();
         getContentPane().add(c);
         i.addTab("Administrar", new Doctor());
+        i.addTab("Reportes", new Panel_medico_consulta());
         c.addTab("Médico","doctor", i);  
     }
     
