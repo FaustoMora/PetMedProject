@@ -20,6 +20,7 @@ public interface BaseDAO {
     public BasicController load();
     public void update();
     public LinkedList getList();
+    public void delete();
     
     
 }
