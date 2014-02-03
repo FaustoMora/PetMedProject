@@ -468,3 +468,11 @@ begin
 select id from consulta where fecha_consulta=fecha and medico_id =med_id and mascota_id=masc_id;
 END;
 // delimiter ;
+
+delimiter //
+create procedure count_medico_consulta()
+begin
+select m.nombre, count(c.id) as 'Numero de Consulta' from consulta c, medico m where c.medico_id=m.id
+group by (m.nombre);
+end;
+//delimiter ;
